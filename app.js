@@ -1,141 +1,154 @@
-import React, {Component} from 'react';
-import {render} from 'react-dom';
-import {StaticMap} from 'react-map-gl';
+/* global fetch */
+import React, { Component } from 'react';
+import { render } from 'react-dom';
+import { StaticMap } from 'react-map-gl';
 import DeckGL from '@deck.gl/react';
-import {GeoJsonLayer, PolygonLayer} from '@deck.gl/layers';
-import {LightingEffect, AmbientLight, _SunLight as SunLight} from '@deck.gl/core';
-import {scaleThreshold} from 'd3-scale';
+import { GeoJsonLayer, ArcLayer } from '@deck.gl/layers';
+import { scaleQuantile } from 'd3-scale';
 
 // Set your mapbox token here
-const MAPBOX_TOKEN = process.env.MapboxAccessToken; // eslint-disable-line
+const devVersion = true;
+const MAPBOX_TOKEN = devVersion ? "pk.eyJ1IjoiYmVsb3BvdCIsImEiOiJjazZzMjB4ZjQwYzhwM2xzNTVkcHBudTY4In0.FbuCqIEfhgMN3d02eZQ4hQ" : process.env.MapboxAccessToken; // eslint-disable-line
 
 // Source data GeoJSON
 const DATA_URL =
-  'https://raw.githubusercontent.com/uber-common/deck.gl-data/master/examples/geojson/vancouver-blocks.json'; // eslint-disable-line
+  'https://raw.githubusercontent.com/uber-common/deck.gl-data/master/examples/arc/counties.json'; // eslint-disable-line
 
-export const COLOR_SCALE = scaleThreshold()
-  .domain([-0.6, -0.45, -0.3, -0.15, 0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9, 1.05, 1.2])
-  .range([
-    [65, 182, 196],
-    [127, 205, 187],
-    [199, 233, 180],
-    [237, 248, 177],
-    // zero
-    [255, 255, 204],
-    [255, 237, 160],
-    [254, 217, 118],
-    [254, 178, 76],
-    [253, 141, 60],
-    [252, 78, 42],
-    [227, 26, 28],
-    [189, 0, 38],
-    [128, 0, 38]
-  ]);
+export const inFlowColors = [
+  [255, 255, 204],
+  [199, 233, 180],
+  [127, 205, 187],
+  [65, 182, 196],
+  [29, 145, 192],
+  [34, 94, 168],
+  [12, 44, 132]
+];
+
+export const outFlowColors = [
+  [255, 255, 178],
+  [254, 217, 118],
+  [254, 178, 76],
+  [253, 141, 60],
+  [252, 78, 42],
+  [227, 26, 28],
+  [177, 0, 38]
+];
 
 const INITIAL_VIEW_STATE = {
-  latitude: 49.254,
-  longitude: -123.13,
-  zoom: 11,
-  maxZoom: 16,
-  pitch: 45,
-  bearing: 0
+  longitude: -100,
+  latitude: 40.7,
+  zoom: 3,
+  maxZoom: 15,
+  pitch: 30,
+  bearing: 30
 };
 
-const ambientLight = new AmbientLight({
-  color: [255, 255, 255],
-  intensity: 1.0
-});
-
-const dirLight = new SunLight({
-  timestamp: Date.UTC(2019, 7, 1, 22),
-  color: [255, 255, 255],
-  intensity: 1.0,
-  _shadow: true
-});
-
-const landCover = [[[-123.0, 49.196], [-123.0, 49.324], [-123.306, 49.324], [-123.306, 49.196]]];
-
+/* eslint-disable react/no-deprecated */
 export default class App extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
-      hoveredObject: null
+      hoveredCounty: null,
+      // Set default selection to San Francisco
+      selectedCounty: null
     };
-    this._onHover = this._onHover.bind(this);
+    this._onHoverCounty = this._onHoverCounty.bind(this);
+    this._onSelectCounty = this._onSelectCounty.bind(this);
     this._renderTooltip = this._renderTooltip.bind(this);
 
-    const lightingEffect = new LightingEffect({ambientLight, dirLight});
-    lightingEffect.shadowColor = [0, 0, 0, 0.5];
-    this._effects = [lightingEffect];
+    this._recalculateArcs(this.props.data);
   }
 
-  _onHover({x, y, object}) {
-    this.setState({x, y, hoveredObject: object});
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.data !== this.props.data) {
+      this._recalculateArcs(nextProps.data);
+    }
   }
 
-  _renderLayers() {
-    const {data = DATA_URL} = this.props;
+  _onHoverCounty({ x, y, object }) {
+    this.setState({ x, y, hoveredCounty: object });
+  }
 
-    return [
-      // only needed when using shadows - a plane for shadows to drop on
-      new PolygonLayer({
-        id: 'ground',
-        data: landCover,
-        stroked: false,
-        getPolygon: f => f,
-        getFillColor: [0, 0, 0, 0]
-      }),
-      new GeoJsonLayer({
-        id: 'geojson',
-        data,
-        opacity: 0.8,
-        stroked: false,
-        filled: true,
-        extruded: true,
-        wireframe: true,
-        getElevation: f => Math.sqrt(f.properties.valuePerSqm) * 10,
-        getFillColor: f => COLOR_SCALE(f.properties.growth),
-        getLineColor: [255, 255, 255],
-        pickable: true,
-        onHover: this._onHover
-      })
-    ];
+  _onSelectCounty({ object }) {
+    this._recalculateArcs(this.props.data, object);
   }
 
   _renderTooltip() {
-    const {x, y, hoveredObject} = this.state;
+    const { x, y, hoveredCounty } = this.state;
     return (
-      hoveredObject && (
-        <div className="tooltip" style={{top: y, left: x}}>
-          <div>
-            <b>Average Property Value</b>
-          </div>
-          <div>
-            <div>${hoveredObject.properties.valuePerParcel} / parcel</div>
-            <div>
-              ${hoveredObject.properties.valuePerSqm} / m<sup>2</sup>
-            </div>
-          </div>
-          <div>
-            <b>Growth</b>
-          </div>
-          <div>{Math.round(hoveredObject.properties.growth * 100)}%</div>
+      hoveredCounty && (
+        <div className="tooltip" style={{ left: x, top: y }}>
+          {hoveredCounty.properties.name}
         </div>
       )
     );
   }
 
+  _recalculateArcs(data, selectedCounty = this.state.selectedCounty) {
+    if (!data) {
+      return;
+    }
+    if (!selectedCounty) {
+      selectedCounty = data.find(f => f.properties.name === 'Los Angeles, CA');
+    }
+    const { flows, centroid } = selectedCounty.properties;
+
+    const arcs = Object.keys(flows).map(toId => {
+      const f = data[toId];
+      return {
+        source: centroid,
+        target: f.properties.centroid,
+        value: flows[toId]
+      };
+    });
+
+    const scale = scaleQuantile()
+      .domain(arcs.map(a => Math.abs(a.value)))
+      .range(inFlowColors.map((c, i) => i));
+
+    arcs.forEach(a => {
+      a.gain = Math.sign(a.value);
+      a.quantile = scale(Math.abs(a.value));
+    });
+
+    if (this.props.onSelectCounty) {
+      this.props.onSelectCounty(selectedCounty);
+    }
+
+    this.setState({ arcs, selectedCounty });
+  }
+
+  _renderLayers() {
+    const { data, strokeWidth = 2 } = this.props;
+
+    return [
+      new GeoJsonLayer({
+        id: 'geojson',
+        data,
+        stroked: false,
+        filled: true,
+        getFillColor: [0, 0, 0, 0],
+        onHover: this._onHoverCounty,
+        onClick: this._onSelectCounty,
+        pickable: true
+      }),
+      new ArcLayer({
+        id: 'arc',
+        data: this.state.arcs,
+        getSourcePosition: d => d.source,
+        getTargetPosition: d => d.target,
+        getSourceColor: d => (d.gain > 0 ? inFlowColors : outFlowColors)[d.quantile],
+        getTargetColor: d => (d.gain > 0 ? outFlowColors : inFlowColors)[d.quantile],
+        getWidth: strokeWidth
+      })
+    ];
+  }
+
   render() {
-    const {mapStyle = 'mapbox://styles/mapbox/light-v9'} = this.props;
+    const { mapStyle = 'mapbox://styles/mapbox/light-v9' } = this.props;
 
     return (
-      <DeckGL
-        layers={this._renderLayers()}
-        effects={this._effects}
-        initialViewState={INITIAL_VIEW_STATE}
-        controller={true}
-      >
+      <DeckGL layers={this._renderLayers()} initialViewState={INITIAL_VIEW_STATE} controller={true}>
         <StaticMap
           reuseMaps
           mapStyle={mapStyle}
@@ -151,4 +164,10 @@ export default class App extends Component {
 
 export function renderToDOM(container) {
   render(<App />, container);
+
+  fetch(DATA_URL)
+    .then(response => response.json())
+    .then(({ features }) => {
+      render(<App data={features} />, container);
+    });
 }
