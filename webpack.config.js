@@ -25,6 +25,15 @@ const CONFIG = {
         options: {
           presets: ['@babel/preset-react']
         }
+      },
+      {
+        test: /\.csv$/,
+        loader: 'csv-loader',
+        options: {
+          dynamicTyping: true,
+          header: true,
+          skipEmptyLines: true
+        }
       }
     ]
   },
@@ -34,7 +43,9 @@ const CONFIG = {
   },
 
   // Optional: Enables reading mapbox token from environment variable
-  plugins: [new webpack.EnvironmentPlugin(['MapboxAccessToken'])]
+  plugins: [new webpack.EnvironmentPlugin({
+    'MapboxAccessToken': "pk.eyJ1IjoiYmVsb3BvdCIsImEiOiJjazZzMjB4ZjQwYzhwM2xzNTVkcHBudTY4In0.FbuCqIEfhgMN3d02eZQ4hQ"
+  })]
 };
 
 // This line enables bundling against src in this repo rather than installed module
