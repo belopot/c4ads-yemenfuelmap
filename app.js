@@ -5,6 +5,7 @@ import DeckGL from '@deck.gl/react';
 import { ScatterplotLayer, ArcLayer } from '@deck.gl/layers';
 import CSVDATA from './assets/data.csv';
 import $ from 'jquery';
+import {gsap, Power2} from 'gsap';
 
 
 const MAPBOX_TOKEN = process.env.MapboxAccessToken;
@@ -177,11 +178,10 @@ export default class App extends Component {
       tooltip.style.left = `${x}px`;
       tooltip.innerHTML = `<div><span class="key key-route">Port:</span><span class="value">${object.port}</span></div>`;
       tooltip.innerHTML += `<div><span class="key key-route">Count:</span><span class="value">${object.count}</span></div>`;
-      tooltip.style.backgroundColor = '#1D1E27';
-      tooltip.style.opacity = '1';
+      tooltip.style.opacity = 1;
     } else {
       tooltip.innerHTML = '';
-      tooltip.style.opacity = '0';
+      tooltip.style.opacity = 0;
     }
   }
 
@@ -195,11 +195,10 @@ export default class App extends Component {
       tooltip.innerHTML += `<div><span class="key key-route">Date:</span><span class="value">${new Date(object.decisionDate).toLocaleDateString()}</span></div>`;
       tooltip.innerHTML += `<div><span class="key key-route">Fuel Type:</span><span class="value">${object.fuelType || 'Untitled'}</span></div>`;
       tooltip.innerHTML += `<div><span class="key key-route">Fuel Amount:</span><span class="value">${object.fuelAmount || '0'}</span></div>`;
-      tooltip.style.backgroundColor = '#1D1E27';
-      tooltip.style.opacity = '1';
+      tooltip.style.opacity = 1;
     } else {
       tooltip.innerHTML = '';
-      tooltip.style.opacity = '0';
+      tooltip.style.opacity = 0;
     }
   }
 
