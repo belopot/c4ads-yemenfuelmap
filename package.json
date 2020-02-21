@@ -8,10 +8,11 @@
     "build": "webpack"
   },
   "dependencies": {
-    "d3-scale": "^2.0.0",
+    "d3": "^4.13.0",
     "deck.gl": "^8.0.0",
     "gsap": "^3.1.1",
     "jquery": "^3.4.1",
+    "omni-slider": "^1.2.1",
     "papaparse": "^5.1.1",
     "react": "^16.3.0",
     "react-dom": "^16.3.0",

@@ -3,23 +3,32 @@ import { render } from 'react-dom';
 import { StaticMap } from 'react-map-gl';
 import DeckGL from '@deck.gl/react';
 import { ScatterplotLayer, ArcLayer } from '@deck.gl/layers';
-import CSVDATA from './assets/data.csv';
+import csvData from './assets/data.csv';
 import $ from 'jquery';
 import { gsap, Power2 } from 'gsap';
+import * as d3 from "d3";
+import Slider from 'omni-slider';
 
 
 const MAPBOX_TOKEN = process.env.MapboxAccessToken;
 
 let INITIAL_VIEW_STATE = {
-  longitude: -74,
-  latitude: 40.7,
-  zoom: 5,
+  longitude: 44.127197,
+  latitude: 28.5404328,
+  zoom: 4,
   maxZoom: 16,
-  pitch: 0,
+  pitch: 60,
   bearing: 0
 };
 
 let tooltip = $(".tooltip")[0];
+
+
+let minDateDom = document.getElementById('min');
+let maxDateDom = document.getElementById('max');
+let graphDom = document.getElementById('graph');
+
+
 
 
 export default class App extends Component {
@@ -27,26 +36,55 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      hoveredPort: null,
       selectedPort: null
     }
-  }
 
-  componentWillMount() {
-    this.arcData = this._getArcData(CSVDATA);
-    this.scatterplotData = this._getScatterplotData(CSVDATA);
-    //initialize lon & lat
-    for (let i = 0; this.scatterplotData.length; i++) {
-      if (this.scatterplotData[i].coordinates) {
-        INITIAL_VIEW_STATE.longitude = this.scatterplotData[i].coordinates[0];
-        INITIAL_VIEW_STATE.latitude = this.scatterplotData[i].coordinates[1];
-        break;
-      }
-    }
+    this.deckGL = React.createRef();
+
+    this.arcData = this._getArcData(csvData);
+    this.scatterplotData = this._getScatterplotData(csvData);
+
+
+    /**
+     * Init Slider 
+     */
+    this.startDate = csvData[0].decision_date.toLocaleString().split(",")[0];
+    this.endDate = csvData[csvData.length - 1].decision_date.toLocaleString().split(",")[0];
+
+    minDateDom.innerHTML = this.startDate;
+    maxDateDom.innerHTML = this.endDate;
+
+    let self = this;
+    const slider = new Slider(document.getElementById("slider"), {
+      isDate: true,
+      min: this.startDate,
+      max: this.endDate,
+      start: this.startDate,
+      end: this.endDate,
+      overlap: true
+    });
+
+    slider.subscribe('moving', function (z) {
+
+      minDateDom.innerHTML = z.left.toLocaleString().split(",")[0];
+      maxDateDom.innerHTML = z.right.toLocaleString().split(",")[0];
+
+      //Filter data by decision_date
+      let filteredData = csvData.filter(obj => new Date(obj.decision_date) >= new Date(z.left));
+      filteredData = filteredData.filter(obj => new Date(obj.decision_date) <= new Date(z.right));
+
+      self.arcData = self._getArcData(filteredData);
+      self.scatterplotData = self._getScatterplotData(filteredData);
+      self.setState({
+        selectedPort: null,
+      })
+
+    });
+
+    this._histogram(csvData);
   }
 
   _renderLayers() {
-
     return [
       new ScatterplotLayer({
         id: 'scatterplot-layer',
@@ -65,7 +103,14 @@ export default class App extends Component {
         getLineColor: d => [50, 12, 120, 255],
         autoHighlight: true,
         highlightColor: [249, 205, 23, 180],
-        onHover: this._scatterplotTooltip,
+        onHover: (info, event) => {
+          this._scatterplotTooltip(info.x, info.y, info.object)
+          this._scatterplotFilterData(info.object);
+        },
+        onClick: (info, evnet) => {
+          // this._scatterplotFilterData(info.object);
+        },
+
       }),
       new ArcLayer({
         id: 'arc',
@@ -74,7 +119,7 @@ export default class App extends Component {
         getTargetPosition: d => d.targetPosition,
         getSourceColor: [120, 12, 50, 100],
         getTargetColor: [50, 12, 120, 100],
-        getWidth: 10,
+        getWidth: 5,
         pickable: true,
         autoHighlight: true,
         highlightColor: [249, 205, 23, 250],
@@ -87,7 +132,7 @@ export default class App extends Component {
     const { mapStyle = 'mapbox://styles/mapbox/light-v9' } = this.props;
 
     return (
-      <DeckGL layers={this._renderLayers()} initialViewState={INITIAL_VIEW_STATE} controller={true}>
+      <DeckGL ref={this.deckGL} layers={this._renderLayers()} initialViewState={INITIAL_VIEW_STATE} controller={true}>
         <StaticMap
           reuseMaps
           mapStyle={mapStyle}
@@ -99,25 +144,12 @@ export default class App extends Component {
   }
 
 
+
   /**
    * Create the dataset for the arc & scatterplot
    */
-
-  // application_num: 1
-  // decision_date: "2018-10-20"
-  // offloading_port_cleaned_EN: "Mukalla, Yemen"
-  // loading_port_cleaned_EN: null
-  // fuel_amount_clean: 5000
-  // fuel_type_clean_EN: "Petrol"
-  // lon: null
-  // lat: null
-  // Origin: null
-  // dest_lat: 49.127197
-  // dest_lon: 14.5404328
-  // Destination: "Mukalla, Yemen"
-
   _getArcData(data) {
-    let arcData = [];
+    let _data = [];
     for (let i = 0; i < data.length; i++) {
       const origin = data[i].Origin;
       const sourcePosition = [data[i].lon, data[i].lat, 0];
@@ -129,7 +161,7 @@ export default class App extends Component {
       const fuelType = data[i].fuel_type_clean_EN;
 
       if (origin !== null & sourcePosition !== null & destination !== null & targetPosition !== null) {
-        arcData.push({
+        _data.push({
           origin: origin,
           sourcePosition: sourcePosition,
           destination: destination,
@@ -140,7 +172,7 @@ export default class App extends Component {
         })
       }
     }
-    return arcData;
+    return _data;
   }
 
   _getScatterplotData(data) {
@@ -179,13 +211,42 @@ export default class App extends Component {
     return portsMod;
   }
 
+  /**
+   * Filter data
+   */
+
+  _scatterplotFilterData(object) {
+    if (object) {
+      const temp = csvData;
+      const portTemp = this.scatterplotData;
+
+      let filteredCsvData = temp.filter(obj => obj.Origin == object.port || obj.Destination == object.port);
+      // let filteredPortData = portTemp.filter(obj => obj.port == object.port);
+
+      this.arcData = this._getArcData(filteredCsvData);
+
+      this.setState({
+        selectedPort: object,
+      })
+
+    } else {
+
+      this.arcData = this._getArcData(csvData);
+
+      this.setState({
+        selectedPort: null,
+      })
+
+    }
+  }
 
   /**
    * Tooltip
    */
 
   //Scatterplot Tooltip
-  _scatterplotTooltip({ x, y, object }) {
+  _scatterplotTooltip(x, y, object) {
+
     if (object) {
       tooltip.style.top = `${y}px`;
       tooltip.style.left = `${x}px`;
@@ -214,6 +275,55 @@ export default class App extends Component {
       tooltip.innerHTML = '';
       tooltip.style.opacity = 0;
     }
+  }
+
+  _histogram(data) {
+
+    const margin = {
+      top: 0,
+      right: 0,
+      bottom: 5,
+      left: 0
+    }
+
+    const width = graphDom.offsetWidth;
+    const height = 40 - margin.top - margin.bottom;
+
+    const parseDate = d3.timeParse("%m/%d/%Y");
+
+    const x = d3.scaleTime().domain([
+      new Date(this.startDate),
+      new Date(this.endDate)
+    ]).rangeRound([0, width]);
+    
+    const y = d3.scaleLinear().range([height, 0]);
+
+    const histogram = d3.histogram().value(function (d) {
+      return d.decision_date;
+    }).domain(x.domain()).thresholds(x.ticks(d3.timeWeek));
+
+    const svg = d3.select("#graph").append("svg").attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    data.forEach(function (d) {
+      d.decision_date = parseDate(d.decision_date);
+    });
+
+    const bins = histogram(data);
+
+    y.domain([
+      0,
+      d3.max(bins, function (d) {
+        return d.length;
+      })
+    ]);
+
+    svg.selectAll("rect").data(bins).enter().append("rect").attr("class", "bar").attr("x", 1).attr("transform", function (d) {
+      return "translate(" + x(d.x0) + "," + y(d.length) + ")";
+    }).attr("width", function (d) {
+      return x(d.x1) - x(d.x0) - 1 > 0 ? x(d.x1) - x(d.x0) - 1 : 0;
+    }).attr("height", function (d) {
+      return height - y(d.length);
+    });
   }
 
 }

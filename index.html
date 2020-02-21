@@ -45,12 +45,116 @@
     .value {
       color: #fff;
     }
+
+    /* Slider and histogram */
+    .histogram {
+      position: absolute;
+      bottom: 0;
+      width: 90%;
+      margin: auto;
+      margin-left: 5%;
+      margin-right: 5%;
+    }
+
+    .histogram .inner-histogram {
+      /*rgba(0, 0, 0, 0.75);*/
+      transition: all 0.5s ease;
+      background-color: rgba(255, 255, 255, 0.616);
+      color: #FFFAFA;
+      border-radius: 3px;
+      border-color: #fff;
+      padding: 15px 20px 20px 20px;
+      margin-bottom: 20px;
+    }
+
+    .slider {
+      width: 100%;
+      height: 0.6rem;
+      border-radius: 5px;
+      position: relative;
+      background-color: rgb(230, 230, 230);
+    }
+
+    .slider.one-way .handle.handle-left {
+      visibility: hidden;
+    }
+
+    .slider .handle {
+      width: 1.5rem;
+      height: 1.5rem;
+      border-radius: 2rem;
+      position: absolute;
+      top: -.45rem;
+      border: 1px solid #333;
+      background-color: #fff;
+      text-align: center;
+      cursor: pointer;
+      z-index: 1;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .slider .handle.ontop {
+      z-index: 2;
+    }
+
+    .slider .handle:active {
+      border-color: #0a84c1;
+      box-shadow: 0 0 0.5rem #0a84c1;
+    }
+
+    .slider .handle-left {
+      left: 0;
+    }
+
+    .slider .handle-right {
+      right: 0;
+    }
+
+    .slider .slider-fill {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgb(73, 73, 73);
+      pointer-events: none;
+      -webkit-user-select: none;
+    }
+
+    .slider .slider-transition {
+      -webkit-transition: all 0.5s ease;
+      transition: all 0.5s ease;
+    }
+
+    rect.bar {
+      fill: #4B5157;
+    }
+
+    #min,
+    #max {
+      color: #222222;
+      font-weight: bold;
+    }
+
+    #max {
+      float: right;
+    }
   </style>
 </head>
 
 <body>
   <div class="tooltip"></div>
   <div id="app"></div>
+  <div class="histogram">
+    <div class="inner-histogram">
+      <div id="date-range">
+        <span id="min"></span>
+        <span id="max"></span>
+      </div>
+      <div id="graph"></div>
+      <div id="slider"></div>
+    </div>
+  </div>
 </body>
 <script type="text/javascript" src="app.js"></script>
 <script type="text/javascript">
