@@ -5,7 +5,7 @@ import DeckGL from '@deck.gl/react';
 import { ScatterplotLayer, ArcLayer } from '@deck.gl/layers';
 import CSVDATA from './assets/data.csv';
 import $ from 'jquery';
-import {gsap, Power2} from 'gsap';
+import { gsap, Power2 } from 'gsap';
 
 
 const MAPBOX_TOKEN = process.env.MapboxAccessToken;
@@ -49,15 +49,22 @@ export default class App extends Component {
 
     return [
       new ScatterplotLayer({
-        id: 'scatter-plot',
+        id: 'scatterplot-layer',
         data: this.scatterplotData,
         pickable: true,
+        opacity: 0.8,
+        stroked: true,
+        filled: true,
         radiusScale: 500,
-        getRadius: d => d.count,
+        radiusMinPixels: 1,
+        radiusMaxPixels: 100,
+        lineWidthMinPixels: 2,
         getPosition: d => d.coordinates,
-        getColor: d => [100, 0, 90, 180],
+        getRadius: d => d.count,
+        getFillColor: d => [50, 12, 120, 100],
+        getLineColor: d => [50, 12, 120, 255],
         autoHighlight: true,
-        highlightColor: [50, 12, 120, 100],
+        highlightColor: [249, 205, 23, 180],
         onHover: this._scatterplotTooltip,
       }),
       new ArcLayer({
@@ -69,6 +76,8 @@ export default class App extends Component {
         getTargetColor: [50, 12, 120, 100],
         getWidth: 10,
         pickable: true,
+        autoHighlight: true,
+        highlightColor: [249, 205, 23, 250],
         onHover: this._arcTooltip,
       })
     ];
@@ -142,16 +151,19 @@ export default class App extends Component {
       const sourcePosition = [data[i].lon, data[i].lat, 0];
       const destination = data[i].Destination;
       const targetPosition = [data[i].dest_lon, data[i].dest_lat, 0];
+      const fuelAmount = data[i].fuel_amount_clean;
 
       if (destination in ports) {
         ports[destination] = {
           count: ports[destination].count + 1,
-          position: targetPosition
+          position: targetPosition,
+          fuelAmount: ports[destination].fuelAmount + fuelAmount,
         };
       } else {
         ports[destination] = {
           count: 1,
-          position: targetPosition
+          position: targetPosition,
+          fuelAmount: fuelAmount,
         };
       }
     }
@@ -160,6 +172,7 @@ export default class App extends Component {
       portsMod.push({
         port: key,
         count: ports[key].count,
+        fuelAmount: ports[key].fuelAmount,
         coordinates: ports[key].position
       });
     });
@@ -177,7 +190,8 @@ export default class App extends Component {
       tooltip.style.top = `${y}px`;
       tooltip.style.left = `${x}px`;
       tooltip.innerHTML = `<div><span class="key key-route">Port:</span><span class="value">${object.port}</span></div>`;
-      tooltip.innerHTML += `<div><span class="key key-route">Count:</span><span class="value">${object.count}</span></div>`;
+      tooltip.innerHTML += `<div><span class="key key-route">count:</span><span class="value">${object.count}</span></div>`;
+      tooltip.innerHTML += `<div><span class="key key-route">Fuel amount:</span><span class="value">${object.fuelAmount}</span></div>`;
       tooltip.style.opacity = 1;
     } else {
       tooltip.innerHTML = '';
