@@ -8,6 +8,7 @@ import $ from 'jquery';
 import { gsap, Power2 } from 'gsap';
 import * as d3 from "d3";
 import Slider from 'omni-slider';
+import ResizeObserver from "resize-observer-polyfill";
 
 
 const MAPBOX_TOKEN = process.env.MapboxAccessToken;
@@ -28,15 +29,18 @@ let minDateDom = document.getElementById('min');
 let maxDateDom = document.getElementById('max');
 let graphDom = document.getElementById('graph');
 
+const parseDate = d3.timeParse("%m/%d/%Y");
 
-
+const playSpeed = 1;
 
 export default class App extends Component {
 
   constructor(props) {
     super(props);
+
     this.state = {
-      selectedPort: null
+      selectedPort: null,
+      endDate: 0
     }
 
     this.deckGL = React.createRef();
@@ -51,37 +55,150 @@ export default class App extends Component {
     this.startDate = csvData[0].decision_date.toLocaleString().split(",")[0];
     this.endDate = csvData[csvData.length - 1].decision_date.toLocaleString().split(",")[0];
 
+    this.timelineLen = new Date(this.endDate).getTime() - new Date(this.startDate).getTime();
+    this.timelineStep = this.timelineLen / (300 * playSpeed);
+
+    this.curStartDate = this.startDate;
+    this.curEndDate = this.endDate;
+
     minDateDom.innerHTML = this.startDate;
     maxDateDom.innerHTML = this.endDate;
 
-    let self = this;
-    const slider = new Slider(document.getElementById("slider"), {
+    this.slider = new Slider(document.getElementById("slider"), {
       isDate: true,
       min: this.startDate,
       max: this.endDate,
       start: this.startDate,
       end: this.endDate,
-      overlap: true
+      overlap: true,
+      isOneWay: false,
+      isDate: true
     });
 
-    slider.subscribe('moving', function (z) {
+    this.isPlaying = false;
+    this.isDelay = false;
 
-      minDateDom.innerHTML = z.left.toLocaleString().split(",")[0];
-      maxDateDom.innerHTML = z.right.toLocaleString().split(",")[0];
+    this._updateLayerBySlider = this._updateLayerBySlider.bind(this);
+    this.slider.subscribe('moving', this._updateLayerBySlider);
 
-      //Filter data by decision_date
-      let filteredData = csvData.filter(obj => new Date(obj.decision_date) >= new Date(z.left));
-      filteredData = filteredData.filter(obj => new Date(obj.decision_date) <= new Date(z.right));
+    this._controlTimeline = this._controlTimeline.bind(this);
+    const playDom = document.getElementById('controls-play');
+    playDom.addEventListener('click', this._controlTimeline);
 
-      self.arcData = self._getArcData(filteredData);
-      self.scatterplotData = self._getScatterplotData(filteredData);
-      self.setState({
-        selectedPort: null,
-      })
-
-    });
+    this._playTimeline = this._playTimeline.bind(this);
 
     this._histogram(csvData);
+
+    this._moveSlider = this._moveSlider.bind(this);
+  }
+
+  componentDidMount() {
+    this.resizeObserver = new ResizeObserver(entries => {
+      const { width, height } = entries[0].contentRect;
+
+      this.setState({
+        width: Math.floor(width),
+        height: Math.floor(height)
+      });
+
+    });
+
+    this.resizeObserver.observe(document.getElementById('app'));
+  }
+
+  componentWillUnmount() {
+    this.resizeObserver.disconnect();
+  }
+
+  _controlTimeline(event) {
+    if (event === undefined)
+      return;
+
+    this.isPlaying = !this.isPlaying;
+
+    if (this.isPlaying) {
+      //Play
+      document.getElementById("play-path").style.display = "none";
+      document.getElementById("pause-path").style.display = "block";
+
+      var data = {
+        left: parseDate(this.startDate),
+        right: this.curEndDate === this.endDate ? parseDate(this.startDate) : parseDate(this.curEndDate)
+      };
+
+      this.slider.move(data, false);
+
+      this.isDelay = true;
+      this.intervalId = setInterval(this._playTimeline, 60);
+    }
+    else {
+      //Pause
+      this._pauseSlider();
+    }
+  }
+
+
+  _playTimeline() {
+
+    if (this.isDelay) {
+      setTimeout(this._moveSlider, 1000)
+    }
+    else {
+      this._moveSlider();
+    }
+
+
+  }
+
+  _moveSlider() {
+
+    this.curEndDate = new Date(new Date(this.curEndDate).getTime() + this.timelineStep);
+    var data = {
+      left: parseDate(this.startDate),
+      right: this.curEndDate
+    };
+    this.slider.move(data, false);
+
+    if (this.isDelay) {
+      this.isDelay = false;
+    }
+
+
+    if (this.curEndDate === this.endDate) {
+      //Stop playing
+      this._pauseSlider();
+    }
+  }
+
+  _pauseSlider() {
+    clearInterval(this.intervalId);
+
+    document.getElementById("play-path").style.display = "block";
+    document.getElementById("pause-path").style.display = "none";
+
+    this.isPlaying = false;
+    this.isDelay = false;
+  }
+
+  _updateLayerBySlider(value) {
+
+    const { left, right } = value;
+
+    this.curStartDate = left.toLocaleString().split(",")[0];
+    this.curEndDate = right.toLocaleString().split(",")[0];
+
+    minDateDom.innerHTML = this.curStartDate;
+    maxDateDom.innerHTML = this.curEndDate;
+
+    //Filter data by decision_date
+    let filteredData = csvData.filter(obj => new Date(obj.decision_date) >= new Date(left));
+    filteredData = filteredData.filter(obj => new Date(obj.decision_date) <= new Date(right));
+
+    this.arcData = this._getArcData(filteredData);
+    this.scatterplotData = this._getScatterplotData(filteredData);
+    this.setState({
+      selectedPort: null,
+    })
   }
 
   _renderLayers() {
@@ -129,6 +246,7 @@ export default class App extends Component {
   }
 
   render() {
+
     const { mapStyle = 'mapbox://styles/mapbox/light-v9' } = this.props;
 
     return (
@@ -279,6 +397,7 @@ export default class App extends Component {
 
   _histogram(data) {
 
+
     const margin = {
       top: 0,
       right: 0,
@@ -289,13 +408,12 @@ export default class App extends Component {
     const width = graphDom.offsetWidth;
     const height = 40 - margin.top - margin.bottom;
 
-    const parseDate = d3.timeParse("%m/%d/%Y");
 
     const x = d3.scaleTime().domain([
       new Date(this.startDate),
       new Date(this.endDate)
     ]).rangeRound([0, width]);
-    
+
     const y = d3.scaleLinear().range([height, 0]);
 
     const histogram = d3.histogram().value(function (d) {

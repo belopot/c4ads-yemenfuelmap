@@ -80,9 +80,9 @@
     }
 
     .slider .handle {
-      width: 1.5rem;
-      height: 1.5rem;
-      border-radius: 2rem;
+      width: 0.5rem;
+      height: 1.2rem;
+      border-radius: 0.3rem;
       position: absolute;
       top: -.45rem;
       border: 1px solid #333;
@@ -130,6 +130,10 @@
       fill: #4B5157;
     }
 
+    #min{
+      padding-left: 15px;
+    }
+
     #min,
     #max {
       color: #222222;
@@ -138,18 +142,52 @@
 
     #max {
       float: right;
+      margin-left: auto;
+    }
+
+    .playback-controls {
+      /* display: inline; */
+      display: flex;
+      /* align-items: flex-start; */
+      align-items: center;
+      margin-bottom: 5px;
+    }
+
+    .playback-controls svg path,
+    .playback-controls svg {
+      transition: .3s all;
+      cursor: pointer;
+    }
+
+    .playback-controls svg path,
+    .playback-controls svg {
+      transition: .3s all;
+      cursor: pointer;
     }
   </style>
 </head>
-
 <body>
   <div class="tooltip"></div>
   <div id="app"></div>
   <div class="histogram">
     <div class="inner-histogram">
       <div id="date-range">
-        <span id="min"></span>
-        <span id="max"></span>
+        <div class="playback-controls">
+          <svg id="controls-play" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">
+            <path id="play-path" fill="#333333" d="M8 5v14l11-7z" style="display: block;"></path>
+            <path d="M0 0h24v24H0z" fill="none"></path>
+            <path id="pause-path" style="display: none;" s="" d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" fill="#333333"></path>
+            <path d="M0 0h24v24H0z" fill="none"></path>
+          </svg>
+          <svg id="controls-restart" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none"></path>
+            <path fill="#333333"
+              d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z">
+            </path>
+          </svg>
+          <span id="min"></span>
+          <span id="max"></span>
+        </div>
       </div>
       <div id="graph"></div>
       <div id="slider"></div>
