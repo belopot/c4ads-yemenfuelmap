@@ -5,11 +5,9 @@ import DeckGL from '@deck.gl/react';
 import { ScatterplotLayer, ArcLayer } from '@deck.gl/layers';
 import csvData from './assets/data.csv';
 import $ from 'jquery';
-import { gsap, Power2 } from 'gsap';
 import * as d3 from "d3";
 import Slider from 'omni-slider';
 import ResizeObserver from "resize-observer-polyfill";
-
 
 const MAPBOX_TOKEN = process.env.MapboxAccessToken;
 
@@ -29,40 +27,33 @@ let minDateDom = document.getElementById('min');
 let maxDateDom = document.getElementById('max');
 let graphDom = document.getElementById('graph');
 
-const parseDate = d3.timeParse("%m/%d/%Y");
+const parseDate = d3.timeParse("%m/%d/%Y, %I:%M:%S %p");
 
-const playSpeed = 1;
 
 export default class App extends Component {
 
   constructor(props) {
     super(props);
 
-    this.state = {
-      selectedPort: null,
-      endDate: 0
-    }
-
     this.deckGL = React.createRef();
 
-    this.arcData = this._getArcData(csvData);
-    this.scatterplotData = this._getScatterplotData(csvData);
-
+    //Pre-processing data
+    this.csvData = csvData.filter(obj => obj.decision_date !== null);
 
     /**
      * Init Slider 
      */
-    this.startDate = csvData[0].decision_date.toLocaleString().split(",")[0];
-    this.endDate = csvData[csvData.length - 1].decision_date.toLocaleString().split(",")[0];
-
-    this.timelineLen = new Date(this.endDate).getTime() - new Date(this.startDate).getTime();
-    this.timelineStep = this.timelineLen / (300 * playSpeed);
+    this.startDate = (this.csvData[0].decision_date + ", 12:00:00 AM").toLocaleString();
+    this.endDate = (this.csvData[this.csvData.length - 1].decision_date + ", 12:00:00 AM").toLocaleString();
 
     this.curStartDate = this.startDate;
     this.curEndDate = this.endDate;
 
-    minDateDom.innerHTML = this.startDate;
-    maxDateDom.innerHTML = this.endDate;
+    this.timelineLen = new Date(this.endDate).getTime() - new Date(this.startDate).getTime();
+    this.timelineStep = this.timelineLen / 100;
+
+    minDateDom.innerHTML = this.startDate.split(',')[0];
+    maxDateDom.innerHTML = this.endDate.split(',')[0];
 
     this.slider = new Slider(document.getElementById("slider"), {
       isDate: true,
@@ -76,20 +67,44 @@ export default class App extends Component {
     });
 
     this.isPlaying = false;
-    this.isDelay = false;
 
-    this._updateLayerBySlider = this._updateLayerBySlider.bind(this);
-    this.slider.subscribe('moving', this._updateLayerBySlider);
+    this.isPreserve = true;
 
+    this._updateDeckLayer = this._updateDeckLayer.bind(this);
+    this.slider.subscribe('moving', this._updateDeckLayer);
+
+    //Play | Pause 
     this._controlTimeline = this._controlTimeline.bind(this);
     const playDom = document.getElementById('controls-play');
     playDom.addEventListener('click', this._controlTimeline);
 
-    this._playTimeline = this._playTimeline.bind(this);
+    //Reset
+    this._resetTimeline = this._resetTimeline.bind(this);
+    const resetDom = document.getElementById('controls-restart');
+    resetDom.addEventListener('click', this._resetTimeline);
 
-    this._histogram(csvData);
+    //Preserve
+    this._changePreserve = this._changePreserve.bind(this);
+    const preserveDom = document.getElementById('preseve');
+    preserveDom.addEventListener('change', this._changePreserve);
+    preserveDom.checked = this.isPreserve;
 
-    this._moveSlider = this._moveSlider.bind(this);
+
+    this._addInterval = this._addInterval.bind(this);
+    this._updateSlider = this._updateSlider.bind(this);
+
+    //Init drawing
+
+    this.arcData = this.csvData.filter(obj => obj.Origin !== null & obj.Destination !== null);
+    this.scatterplotData = this._getScatterplotData(this.csvData);
+    this.state = {
+      selectedPort: null,
+    }
+
+    this.filteredDataByDate = this.csvData;
+
+    this._histogram(this.csvData);
+
   }
 
   componentDidMount() {
@@ -110,6 +125,26 @@ export default class App extends Component {
     this.resizeObserver.disconnect();
   }
 
+  _changePreserve(event) {
+    this.isPreserve = event.currentTarget.checked;
+  }
+
+  _resetTimeline(event) {
+    if (this.isPlaying) {
+      this._pauseSlider();
+    }
+
+    this.curStartDate = this.startDate;
+    this.curEndDate = this.endDate;
+
+    var data = {
+      left: parseDate(this.curStartDate),
+      right: parseDate(this.curEndDate)
+    };
+
+    this.slider.move(data, false);
+  }
+
   _controlTimeline(event) {
     if (event === undefined)
       return;
@@ -117,19 +152,31 @@ export default class App extends Component {
     this.isPlaying = !this.isPlaying;
 
     if (this.isPlaying) {
+
       //Play
       document.getElementById("play-path").style.display = "none";
       document.getElementById("pause-path").style.display = "block";
 
-      var data = {
-        left: parseDate(this.startDate),
-        right: this.curEndDate === this.endDate ? parseDate(this.startDate) : parseDate(this.curEndDate)
-      };
 
-      this.slider.move(data, false);
+      if (this.curEndDate === this.endDate) {
+        this.curStartDate = this.startDate;
+        this.curEndDate = new Date(new Date(this.startDate).getTime() + this.timelineStep * 2).toLocaleString();
 
-      this.isDelay = true;
-      this.intervalId = setInterval(this._playTimeline, 60);
+        var data = {
+          left: parseDate(this.curStartDate),
+          right: parseDate(this.curEndDate)
+        };
+
+        this.slider.move(data, false);
+
+        //For delay
+        setTimeout(this._addInterval, 1000);
+      }
+      else {
+        this._addInterval();
+      }
+
+
     }
     else {
       //Pause
@@ -137,32 +184,24 @@ export default class App extends Component {
     }
   }
 
-
-  _playTimeline() {
-
-    if (this.isDelay) {
-      setTimeout(this._moveSlider, 1000)
-    }
-    else {
-      this._moveSlider();
-    }
-
-
+  _addInterval() {
+    this.curInterval = setInterval(this._updateSlider, 300);
   }
 
-  _moveSlider() {
+  _updateSlider() {
 
-    this.curEndDate = new Date(new Date(this.curEndDate).getTime() + this.timelineStep);
-    var data = {
-      left: parseDate(this.startDate),
-      right: this.curEndDate
-    };
-    this.slider.move(data, false);
-
-    if (this.isDelay) {
-      this.isDelay = false;
+    if (!this.isPreserve) {
+      this.curStartDate = new Date(new Date(this.curStartDate).getTime() + this.timelineStep).toLocaleString();
     }
 
+    this.curEndDate = new Date(new Date(this.curEndDate).getTime() + this.timelineStep).toLocaleString();
+
+    var data = {
+      left: parseDate(this.curStartDate),
+      right: parseDate(this.curEndDate)
+    };
+
+    this.slider.move(data, false);
 
     if (this.curEndDate === this.endDate) {
       //Stop playing
@@ -171,34 +210,38 @@ export default class App extends Component {
   }
 
   _pauseSlider() {
-    clearInterval(this.intervalId);
+
+    clearInterval(this.curInterval);
 
     document.getElementById("play-path").style.display = "block";
     document.getElementById("pause-path").style.display = "none";
 
     this.isPlaying = false;
-    this.isDelay = false;
   }
 
-  _updateLayerBySlider(value) {
+  _updateDeckLayer(value) {
 
     const { left, right } = value;
 
-    this.curStartDate = left.toLocaleString().split(",")[0];
-    this.curEndDate = right.toLocaleString().split(",")[0];
+    this.curStartDate = left.toLocaleString();
+    this.curEndDate = right.toLocaleString();
 
-    minDateDom.innerHTML = this.curStartDate;
-    maxDateDom.innerHTML = this.curEndDate;
+    minDateDom.innerHTML = left.toLocaleString().split(',')[0];
+    maxDateDom.innerHTML = right.toLocaleString().split(',')[0];
 
     //Filter data by decision_date
-    let filteredData = csvData.filter(obj => new Date(obj.decision_date) >= new Date(left));
+    let filteredData = this.csvData.filter(obj => new Date(obj.decision_date) >= new Date(left));
     filteredData = filteredData.filter(obj => new Date(obj.decision_date) <= new Date(right));
 
-    this.arcData = this._getArcData(filteredData);
+    this.filteredDataByDate = filteredData;
+
+    //Draw data
+    this.arcData = filteredData.filter(obj => obj.Origin !== null & obj.Destination !== null);;
     this.scatterplotData = this._getScatterplotData(filteredData);
     this.setState({
       selectedPort: null,
     })
+
   }
 
   _renderLayers() {
@@ -210,14 +253,14 @@ export default class App extends Component {
         opacity: 0.8,
         stroked: true,
         filled: true,
-        radiusScale: 500,
+        radiusScale: 1100,
         radiusMinPixels: 1,
         radiusMaxPixels: 100,
         lineWidthMinPixels: 2,
         getPosition: d => d.coordinates,
-        getRadius: d => d.count,
-        getFillColor: d => [50, 12, 120, 100],
-        getLineColor: d => [50, 12, 120, 255],
+        getRadius: d => d.count + 20,
+        getFillColor: d => d.color,
+        getLineColor: d => [d.color[0], d.color[1], d.color[2], 255],
         autoHighlight: true,
         highlightColor: [249, 205, 23, 180],
         onHover: (info, event) => {
@@ -232,11 +275,11 @@ export default class App extends Component {
       new ArcLayer({
         id: 'arc',
         data: this.arcData,
-        getSourcePosition: d => d.sourcePosition,
-        getTargetPosition: d => d.targetPosition,
+        getSourcePosition: d => [d.lon, d.lat, 0],
+        getTargetPosition: d => [d.dest_lon, d.dest_lat, 0],
         getSourceColor: [120, 12, 50, 100],
         getTargetColor: [50, 12, 120, 100],
-        getWidth: 5,
+        getWidth: 4,
         pickable: true,
         autoHighlight: true,
         highlightColor: [249, 205, 23, 250],
@@ -264,35 +307,8 @@ export default class App extends Component {
 
 
   /**
-   * Create the dataset for the arc & scatterplot
+   * Create the dataset for the scatterplot
    */
-  _getArcData(data) {
-    let _data = [];
-    for (let i = 0; i < data.length; i++) {
-      const origin = data[i].Origin;
-      const sourcePosition = [data[i].lon, data[i].lat, 0];
-      const destination = data[i].Destination;
-      const targetPosition = [data[i].dest_lon, data[i].dest_lat, 0];
-
-      const decisionDate = data[i].decision_date;
-      const fuelAmount = data[i].fuel_amount_clean;
-      const fuelType = data[i].fuel_type_clean_EN;
-
-      if (origin !== null & sourcePosition !== null & destination !== null & targetPosition !== null) {
-        _data.push({
-          origin: origin,
-          sourcePosition: sourcePosition,
-          destination: destination,
-          targetPosition: targetPosition,
-          decisionDate: decisionDate,
-          fuelAmount: fuelAmount,
-          fuelType: fuelType
-        })
-      }
-    }
-    return _data;
-  }
-
   _getScatterplotData(data) {
 
     const ports = {};
@@ -303,24 +319,50 @@ export default class App extends Component {
       const targetPosition = [data[i].dest_lon, data[i].dest_lat, 0];
       const fuelAmount = data[i].fuel_amount_clean;
 
-      if (destination in ports) {
-        ports[destination] = {
-          count: ports[destination].count + 1,
-          position: targetPosition,
-          fuelAmount: ports[destination].fuelAmount + fuelAmount,
-        };
-      } else {
-        ports[destination] = {
-          count: 1,
-          position: targetPosition,
-          fuelAmount: fuelAmount,
-        };
+      //Destination
+      if (destination !== null) {
+        if (destination in ports) {
+          ports[destination] = {
+            color: [50, 12, 120, 100],
+            count: ports[destination].count + 1,
+            position: targetPosition,
+            fuelAmount: ports[destination].fuelAmount + fuelAmount,
+          };
+        } else {
+          ports[destination] = {
+            color: [50, 12, 120, 100],
+            count: 1,
+            position: targetPosition,
+            fuelAmount: fuelAmount,
+          };
+        }
       }
+
+      //Origin
+      if (origin !== null) {
+        if (origin in ports) {
+          ports[origin] = {
+            color: [120, 12, 50, 100],
+            count: ports[origin].count + 1,
+            position: sourcePosition,
+            fuelAmount: ports[origin].fuelAmount + fuelAmount,
+          };
+        } else {
+          ports[origin] = {
+            color: [120, 12, 50, 100],
+            count: 1,
+            position: sourcePosition,
+            fuelAmount: fuelAmount,
+          };
+        }
+      }
+
     }
     const portsMod = [];
     Object.keys(ports).forEach(function (key) {
       portsMod.push({
         port: key,
+        color: ports[key].color,
         count: ports[key].count,
         fuelAmount: ports[key].fuelAmount,
         coordinates: ports[key].position
@@ -335,13 +377,12 @@ export default class App extends Component {
 
   _scatterplotFilterData(object) {
     if (object) {
-      const temp = csvData;
-      const portTemp = this.scatterplotData;
 
-      let filteredCsvData = temp.filter(obj => obj.Origin == object.port || obj.Destination == object.port);
-      // let filteredPortData = portTemp.filter(obj => obj.port == object.port);
+      const temp = this.filteredDataByDate;
+      let filteredData = temp.filter(obj => obj.Origin == object.port || obj.Destination == object.port);
 
-      this.arcData = this._getArcData(filteredCsvData);
+      this.arcData = filteredData.filter(obj => obj.Origin !== null & obj.Destination !== null);
+      this.scatterplotData = this._getScatterplotData(filteredData);
 
       this.setState({
         selectedPort: object,
@@ -349,7 +390,8 @@ export default class App extends Component {
 
     } else {
 
-      this.arcData = this._getArcData(csvData);
+      this.arcData = this.filteredDataByDate.filter(obj => obj.Origin !== null & obj.Destination !== null);
+      this.scatterplotData = this._getScatterplotData(this.filteredDataByDate);
 
       this.setState({
         selectedPort: null,
@@ -383,11 +425,11 @@ export default class App extends Component {
     if (object) {
       tooltip.style.top = `${y}px`;
       tooltip.style.left = `${x}px`;
-      tooltip.innerHTML = `<div><span class="key key-route">Origin:</span><span class="value">${object.origin}</span></div>`;
-      tooltip.innerHTML += `<div><span class="key key-route">Destination:</span><span class="value">${object.destination}</span></div>`;
-      tooltip.innerHTML += `<div><span class="key key-route">Date:</span><span class="value">${new Date(object.decisionDate).toLocaleDateString()}</span></div>`;
-      tooltip.innerHTML += `<div><span class="key key-route">Fuel Type:</span><span class="value">${object.fuelType || 'Untitled'}</span></div>`;
-      tooltip.innerHTML += `<div><span class="key key-route">Fuel Amount:</span><span class="value">${object.fuelAmount || '0'}</span></div>`;
+      tooltip.innerHTML = `<div><span class="key key-route">Origin:</span><span class="value">${object.Origin}</span></div>`;
+      tooltip.innerHTML += `<div><span class="key key-route">Destination:</span><span class="value">${object.Destination}</span></div>`;
+      tooltip.innerHTML += `<div><span class="key key-route">Date:</span><span class="value">${new Date(object.decision_date).toLocaleDateString()}</span></div>`;
+      tooltip.innerHTML += `<div><span class="key key-route">Fuel Type:</span><span class="value">${object.fuel_type_clean_EN || 'Untitled'}</span></div>`;
+      tooltip.innerHTML += `<div><span class="key key-route">Fuel Amount:</span><span class="value">${object.fuel_amount_clean || '0'}</span></div>`;
       tooltip.style.opacity = 1;
     } else {
       tooltip.innerHTML = '';
@@ -416,6 +458,7 @@ export default class App extends Component {
 
     const y = d3.scaleLinear().range([height, 0]);
 
+    const parse_Date = d3.timeParse("%m/%d/%Y");
     const histogram = d3.histogram().value(function (d) {
       return d.decision_date;
     }).domain(x.domain()).thresholds(x.ticks(d3.timeWeek));
@@ -423,7 +466,7 @@ export default class App extends Component {
     const svg = d3.select("#graph").append("svg").attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     data.forEach(function (d) {
-      d.decision_date = parseDate(d.decision_date);
+      d.decision_date = parse_Date(d.decision_date);
     });
 
     const bins = histogram(data);

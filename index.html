@@ -59,7 +59,7 @@
     .histogram .inner-histogram {
       /*rgba(0, 0, 0, 0.75);*/
       transition: all 0.5s ease;
-      background-color: rgba(255, 255, 255, 0.616);
+      background-color: rgba(53, 53, 53, 0.932);
       color: #FFFAFA;
       border-radius: 3px;
       border-color: #fff;
@@ -116,7 +116,7 @@
       bottom: 0;
       left: 0;
       right: 0;
-      background: rgb(73, 73, 73);
+      background: #ec8720c7;
       pointer-events: none;
       -webkit-user-select: none;
     }
@@ -127,16 +127,16 @@
     }
 
     rect.bar {
-      fill: #4B5157;
+      fill: rgb(114, 114, 114);
     }
 
-    #min{
+    #min {
       padding-left: 15px;
     }
 
     #min,
     #max {
-      color: #222222;
+      color: #9b9b9b;
       font-weight: bold;
     }
 
@@ -164,8 +164,16 @@
       transition: .3s all;
       cursor: pointer;
     }
+
+    #custom-play {
+      position: absolute;
+      left: 175px;
+      color: #919193;
+      opacity: 1;
+    }
   </style>
 </head>
+
 <body>
   <div class="tooltip"></div>
   <div id="app"></div>
@@ -174,18 +182,20 @@
       <div id="date-range">
         <div class="playback-controls">
           <svg id="controls-play" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">
-            <path id="play-path" fill="#333333" d="M8 5v14l11-7z" style="display: block;"></path>
+            <path id="play-path" fill="#efefef" d="M8 5v14l11-7z" style="display: block;"></path>
             <path d="M0 0h24v24H0z" fill="none"></path>
-            <path id="pause-path" style="display: none;" s="" d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" fill="#333333"></path>
+            <path id="pause-path" style="display: none;" s="" d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" fill="#efefef"></path>
             <path d="M0 0h24v24H0z" fill="none"></path>
           </svg>
           <svg id="controls-restart" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24">
             <path d="M0 0h24v24H0z" fill="none"></path>
-            <path fill="#333333"
+            <path fill="#efefef"
               d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z">
             </path>
           </svg>
           <span id="min"></span>
+          <span id="custom-play"><input id="preseve" type="checkbox">Preserve history during
+            playback</span>
           <span id="max"></span>
         </div>
       </div>
