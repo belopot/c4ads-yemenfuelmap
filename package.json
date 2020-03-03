@@ -1,5 +1,5 @@
 {
-  "name": "interactive-map-deckgl",
+  "name": "dataviz-yemenmap",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
@@ -8,10 +8,13 @@
     "build": "webpack"
   },
   "dependencies": {
+    "@material-ui/core": "^4.9.5",
+    "@material-ui/icons": "^4.9.1",
     "d3": "^4.13.0",
     "deck.gl": "^8.0.0",
     "gsap": "^3.1.1",
     "jquery": "^3.4.1",
+    "multiselect-react-dropdown": "^1.4.7",
     "omni-slider": "^1.2.1",
     "papaparse": "^5.1.1",
     "react": "^16.3.0",
@@ -23,6 +26,7 @@
     "@babel/core": "^7.4.0",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.5",
+    "css-loader": "^3.4.2",
     "csv-loader": "^3.0.2",
     "webpack": "^4.20.2",
     "webpack-cli": "^3.1.2",

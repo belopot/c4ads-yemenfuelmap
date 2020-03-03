@@ -34,7 +34,11 @@ const CONFIG = {
           header: true,
           skipEmptyLines: true
         }
-      }
+      },
+      {
+        test: /\.css$/i,
+        use: ['css-loader'],
+      },
     ]
   },
 

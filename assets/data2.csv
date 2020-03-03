@@ -1,0 +1,357 @@
+application_num,decision_date,offloading_port_cleaned_EN,loading_port_cleaned_EN,fuel_amount_clean,fuel_type_clean_EN,lon,lat,Origin,dest_lon,dest_lat,Destination,exporter_proxy,importer_proxy
+1,2018-10-20,"Mukalla, Yemen",,5000,Petrol,,,,49.127197,14.5404328,"Hodeida, Yemen",,3
+10,11/8/2018,"Nishtun, Yemen",,23760,Diesel,,,,52.1872488,15.8224426,"Hodeida, Yemen",,3
+100,3/28/2019,"Mukalla, Yemen",,2770,Diesel,,,,49.127197,14.5404328,"Hodeida, Yemen",,3
+100,3/28/2019,"Mukalla, Yemen",,7186,Petrol,,,,49.127197,14.5404328,"Aden, Yemen",,3
+101,2019-03-29,"Aden, Yemen",,43942,Diesel,,,,45.0186548,12.7854969,"Aden, Yemen",,2
+102,4/1/2019,"Nishtun, Yemen",,4000,Diesel,,,,52.1872488,15.8224426,"Hodeida, Yemen",,5
+103,4/2/2019,"Mukalla, Yemen",,3340,Diesel,,,,49.127197,14.5404328,"Mukalla, Yemen",,3
+104,4/3/2019,"Nishtun, Yemen",,3000,Diesel,,,,52.1872488,15.8224426,"Hodeida, Yemen",,29
+105,4/4/2019,"Hodeida, Yemen",,3805,Diesel,,,,42.9708838,14.7909118,"Hodeida, Yemen",,28
+106,4/9/2019,"Mukalla, Yemen",,3990,Diesel,,,,49.127197,14.5404328,"Hodeida, Yemen",,16
+106,4/9/2019,"Mukalla, Yemen",,9985,Petrol,,,,49.127197,14.5404328,"Hodeida, Yemen",,16
+107,4/9/2019,"Nishtun, Yemen",,3700,Diesel,,,,52.1872488,15.8224426,"Nishtun, Yemen",,5
+108,4/16/2019,"Hodeida, Yemen","Sharjah, UAE",9555,Petrol,55.3776082,25.3609963,"Sharjah, UAE",42.9708838,14.7909118,"Hodeida, Yemen",J,29
+109,4/9/2019,"Hodeida, Yemen",,15000,Mazout,,,,42.9708838,14.7909118,"Hodeida, Yemen",,7
+11,11/16/2018,"Nishtun, Yemen",,2945,Diesel,,,,52.1872488,15.8224426,"Aden, Yemen",,29
+110,4/11/2019,"Mukalla, Yemen",,10675,Petrol,,,,49.127197,14.5404328,"Hodeida, Yemen",,3
+111,4/11/2019,"Mukalla, Yemen",,4480,Diesel,,,,49.127197,14.5404328,"Nishtun, Yemen",,3
+112,4/11/2019,"Nishtun, Yemen",,4741,Petrol,,,,52.1872488,15.8224426,"Nishtun, Yemen",,29
+113,4/15/2019,"Aden, Yemen",,60435,Petrol,,,,45.0186548,12.7854969,"Mukalla, Yemen",,2
+114,6/4/2019,"Hodeida, Yemen","Sharjah, UAE",29971,Diesel,55.3776082,25.3609963,"Sharjah, UAE",42.9708838,14.7909118,"Hodeida, Yemen",J,29
+115,4/17/2019,"Aden, Yemen",,37014,Mazout,,,,45.0186548,12.7854969,"Mukalla, Yemen",,2
+116,4/17/2019,"Nishtun, Yemen",,2500,Diesel,,,,52.1872488,15.8224426,"Mukalla, Yemen",,5
+117,4/18/2019,"Hodeida, Yemen","Fujairah, UAE",14998,Diesel,56.343384,25.130988,"Fujairah, UAE",42.9708838,14.7909118,"Nishtun, Yemen",L,27
+119,4/18/2019,"Aden, Yemen","Fujairah, UAE",60675,Diesel,56.343384,25.130988,"Fujairah, UAE",45.0186548,12.7854969,"Aden, Yemen",K,2
+119,4/18/2019,"Aden, Yemen","Fujairah, UAE",2266,Jet fuel,56.343384,25.130988,"Fujairah, UAE",45.0186548,12.7854969,"Nishtun, Yemen",K,2
+12,11/16/2018,"Aden, Yemen",,89977,Diesel,,,,45.0186548,12.7854969,"Nishtun, Yemen",,1
+12,11/16/2018,"Aden, Yemen",,1004,Aircraft fuel,,,,45.0186548,12.7854969,"Nishtun, Yemen",,1
+121,4/22/2019,"Hodeida, Yemen","Sohar, Oman",3871,Petrol,56.613922,24.486524,"Sohar, Oman",42.9708838,14.7909118,"Aden, Yemen",T,24
+122,4/22/2019,"Mukalla, Yemen","Sohar, Oman",11380,Petrol,56.6290789,24.4169518,"Sohar, Oman",49.127197,14.5404328,"Mukalla, Yemen",W,3
+123,4/24/2019,"Hodeida, Yemen","Fujairah, UAE",17999,Diesel,56.343384,25.130988,"Fujairah, UAE",42.9708838,14.7909118,"Hodeida, Yemen",P,20
+123,4/24/2019,"Hodeida, Yemen","Fujairah, UAE",10000,Petrol,56.343384,25.130988,"Fujairah, UAE",42.9708838,14.7909118,"Hodeida, Yemen",P,20
+124,4/24/2019,"Hodeida, Yemen","Fujairah, UAE",11394,Diesel,56.343384,25.130988,"Fujairah, UAE",42.9708838,14.7909118,"Hodeida, Yemen",P,20
+127,4/29/2019,"Hodeida, Yemen","Fujairah, UAE",7172,Mazout,56.343384,25.130988,"Fujairah, UAE",42.9708838,14.7909118,"Hodeida, Yemen",A,7
+128,,"Nishtun, Yemen","Sohar, Oman",2600,Petrol,56.613922,24.486524,"Sohar, Oman",52.1872488,15.8224426,"Hodeida, Yemen",O,5
+13,11/21/2018,"Mukalla, Yemen",,6400,Diesel,,,,49.127197,14.5404328,"Aden, Yemen",,5
+130,5/1/2019,"Hodeida, Yemen","Fujairah, UAE",20474,Petrol,56.343384,25.130988,"Fujairah, UAE",42.9708838,14.7909118,"Mukalla, Yemen",Z,9
+131,4/24/2019,"Hodeida, Yemen","Fujairah, UAE",11394,Diesel,56.343384,25.130988,"Fujairah, UAE",42.9708838,14.7909118,"Hodeida, Yemen",P,20
+132,5/2/2019,"Aden, Yemen","Novorossiysk, Russia",33993,Diesel,37.7619669,44.7154014,"Novorossiysk, Russia",45.0186548,12.7854969,"Hodeida, Yemen",K,2
+133,5/10/2019,"Hodeida, Yemen","Fujairah, UAE",11505,Diesel,56.343384,25.130988,"Fujairah, UAE",42.9708838,14.7909118,"Aden, Yemen",A,7
+134,5/6/2019,"Nishtun, Yemen","Sohar, Oman",2500,Diesel,56.613922,24.486524,"Sohar, Oman",52.1872488,15.8224426,"Hodeida, Yemen",O,5
+135,5/6/2019,"Nishtun, Yemen","Sharjah, UAE",2000,Diesel,55.3776082,25.3609963,"Sharjah, UAE",52.1872488,15.8224426,"Hodeida, Yemen",O,5
+137,5/9/2019,"Mukalla, Yemen","Fujairah, UAE",9207,Diesel,56.343384,25.130988,"Fujairah, UAE",49.127197,14.5404328,"Nishtun, Yemen",L,27
+138,5/15/2019,"Hodeida, Yemen","Sohar, Oman",15028,Petrol,56.613922,24.486524,"Sohar, Oman",42.9708838,14.7909118,"Hodeida, Yemen",T,24
+139,5/15/2019,"Mukalla, Yemen","Sharjah, UAE",4150,Mazout,55.3776082,25.3609963,"Sharjah, UAE",49.127197,14.5404328,"Hodeida, Yemen",C,32
+14,11/25/2018,"Hodeida, Yemen",,24101,Petrol,,,,42.9708838,14.7909118,"Mukalla, Yemen",,24
+140,5/15/2019,"Mukalla, Yemen","Sharjah, UAE",3272,Diesel,55.3776082,25.3609963,"Sharjah, UAE",49.127197,14.5404328,"Hodeida, Yemen",C,32
+141,5/15/2019,"Nishtun, Yemen","Sharjah, UAE",3951,Diesel,55.3776082,25.3609963,"Sharjah, UAE",52.1872488,15.8224426,"Hodeida, Yemen",J,29
+142,5/17/2019,"Aden, Yemen",,42369,Diesel,,,,45.0186548,12.7854969,"Hodeida, Yemen",K,2
+143,5/18/2019,"Aden, Yemen","Sohar, Oman",57493,Petrol,56.613922,24.486524,"Sohar, Oman",45.0186548,12.7854969,"Hodeida, Yemen",K,2
+144,5/18/2019,"Nishtun, Yemen","Sharjah, UAE",2300,Diesel,55.3776082,25.3609963,"Sharjah, UAE",52.1872488,15.8224426,"Hodeida, Yemen",O,5
+145,5/19/2019,"Nishtun, Yemen","Sharjah, UAE",2150,Diesel,55.3776082,25.3609963,"Sharjah, UAE",52.1872488,15.8224426,"Mukalla, Yemen",O,5
+146,5/21/2019,"Nishtun, Yemen","Sohar, Oman",4761,Petrol,56.613922,24.486524,"Sohar, Oman",52.1872488,15.8224426,"Nishtun, Yemen",J,29
+147,5/21/2019,"Aden, Yemen","Al Hamriya, UAE",42991,Diesel,55.503616,25.464044,"Al Hamriya, UAE",45.0186548,12.7854969,"Mukalla, Yemen",K,2
+148,5/23/2019,"Mukalla, Yemen","Fujairah, UAE",9715,Petrol,56.343384,25.130988,"Fujairah, UAE",49.127197,14.5404328,"Aden, Yemen",V,3
+149,5/23/2019,"Hodeida, Yemen","Fujairah, UAE",7001,Mazout,56.343384,25.130988,"Fujairah, UAE",42.9708838,14.7909118,"Hodeida, Yemen",A,7
+15,11/30/2018,"Mukalla, Yemen",,9967,Diesel,,,,49.127197,14.5404328,"Aden, Yemen",,3
+150,5/24/2019,"Hodeida, Yemen","Al Hamriya, UAE",27580,Petrol,55.503616,25.464044,"Al Hamriya, UAE",42.9708838,14.7909118,"Aden, Yemen",E,11
+151,5/26/2019,"Hodeida, Yemen","Sharjah, UAE",29370,Diesel,55.3776082,25.3609963,"Sharjah, UAE",42.9708838,14.7909118,"Hodeida, Yemen",T,24
+152,5/27/2019,"Hodeida, Yemen","Fujairah, UAE",9968,Diesel,56.343384,25.130988,"Fujairah, UAE",42.9708838,14.7909118,"Mukalla, Yemen",P,20
+152,5/27/2019,"Hodeida, Yemen","Fujairah, UAE",10855,Petrol,56.343384,25.130988,"Fujairah, UAE",42.9708838,14.7909118,"Mukalla, Yemen",P,20
+153,5/28/2019,"Aden, Yemen","Fujairah, UAE",39510,Mazout,56.343384,25.130988,"Fujairah, UAE",45.0186548,12.7854969,"Hodeida, Yemen",K,2
+154,5/28/2019,"Mukalla, Yemen","Sohar, Oman",11726,Diesel,56.613922,24.486524,"Sohar, Oman",49.127197,14.5404328,"Mukalla, Yemen",W,3
+155,5/30/2019,"Hodeida, Yemen","Fujairah, UAE",27016,Petrol,56.343384,25.130988,"Fujairah, UAE",42.9708838,14.7909118,"Hodeida, Yemen",Z,9
+156,6/3/2019,"Hodeida, Yemen",,5657,Gas,,,,42.9708838,14.7909118,"Hodeida, Yemen",N,19
+157,6/3/2019,"Hodeida, Yemen","Al Hamriya, UAE",30486,Diesel,55.503616,25.464044,"Al Hamriya, UAE",42.9708838,14.7909118,"Aden, Yemen",A,14
+158,6/3/2019,"Aden, Yemen","Fujairah, UAE",15867,Diesel,56.343384,25.130988,"Fujairah, UAE",45.0186548,12.7854969,"Nishtun, Yemen",L,27
+16,12/3/2018,"Hodeida, Yemen",,13587,Diesel,,,,42.9708838,14.7909118,"Nishtun, Yemen",,29
+16,12/3/2018,"Hodeida, Yemen",,5095,Petrol,,,,42.9708838,14.7909118,"Mukalla, Yemen",,29
+160,6/4/2019,"Hodeida, Yemen","Sohar, Oman",7468,Petrol,56.613922,24.486524,"Sohar, Oman",42.9708838,14.7909118,"Hodeida, Yemen",T,24
+160,6/4/2019,"Hodeida, Yemen","Sohar, Oman",21487,Diesel,56.613922,24.486524,"Sohar, Oman",42.9708838,14.7909118,"Hodeida, Yemen",T,24
+161,6/4/2019,"Nishtun, Yemen","Sharjah, UAE",2523,Diesel,55.3776082,25.3609963,"Sharjah, UAE",52.1872488,15.8224426,"Hodeida, Yemen",O,5
+162,6/9/2019,"Hodeida, Yemen","Fujairah, UAE",7184,Mazout,56.343384,25.130988,"Fujairah, UAE",42.9708838,14.7909118,"Mukalla, Yemen",A,7
+163,6/9/2019,"Hodeida, Yemen","Al Hamriya, UAE",9161,Diesel,55.503616,25.464044,"Al Hamriya, UAE",42.9708838,14.7909118,"Hodeida, Yemen",A,7
+164,6/16/2019,"Mukalla, Yemen","Sohar, Oman",2132,Diesel,56.613922,24.486524,"Sohar, Oman",49.127197,14.5404328,"Hodeida, Yemen",W,3
+165,6/14/2019,"Hodeida, Yemen","Al Hamriya, UAE",10948,Diesel,55.503616,25.464044,"Al Hamriya, UAE",42.9708838,14.7909118,"Mukalla, Yemen",A,14
+165,6/14/2019,"Hodeida, Yemen","Al Hamriya, UAE",10015,Petrol,55.503616,25.464044,"Al Hamriya, UAE",42.9708838,14.7909118,"Hodeida, Yemen",A,14
+166,6/18/2019,"Hodeida, Yemen","Sohar, Oman",23970,Petrol,56.613922,24.486524,"Sohar, Oman",42.9708838,14.7909118,"Aden, Yemen",T,24
+167,6/20/2019,"Hodeida, Yemen","Al Hamriya, UAE",4485,Diesel,55.503616,25.464044,"Al Hamriya, UAE",42.9708838,14.7909118,"Mukalla, Yemen",Y,28
+169,6/20/2019,"Hodeida, Yemen","Midia, Romania",4800,Gas,28.638192,44.3305896,"Midia, Romania",42.9708838,14.7909118,"Mukalla, Yemen",Q,19
+17,12/4/2018,"Nishtun, Yemen",,3538,Petrol,,,,52.1872488,15.8224426,"Aden, Yemen",,29
+170,6/20/2019,"Mukalla, Yemen","Sharjah, UAE",2150,Diesel,55.3776082,25.3609963,"Sharjah, UAE",49.127197,14.5404328,"Aden, Yemen",O,5
+171,6/20/2019,"Nishtun, Yemen","Sharjah, UAE",2762,Diesel,55.3776082,25.3609963,"Sharjah, UAE",52.1872488,15.8224426,"Hodeida, Yemen",J,29
+172,6/20/2019,"Mukalla, Yemen","Jabel Ali, UAE",9800,Petrol,55.0272904,24.9857145,"Jabel Ali, UAE",49.127197,14.5404328,"Hodeida, Yemen",A,3
+173,6/22/2019,"Aden, Yemen","Al Hamriya, UAE",43132,Diesel,55.503616,25.464044,"Al Hamriya, UAE",45.0186548,12.7854969,"Hodeida, Yemen",U,2
+174,6/27/2019,"Hodeida, Yemen","Fujairah, UAE",29291,Diesel,56.343384,25.130988,"Fujairah, UAE",42.9708838,14.7909118,"Hodeida, Yemen",P,20
+175,6/27/2019,"Aden, Yemen","Fujairah, UAE",20855,Diesel,56.343384,25.130988,"Fujairah, UAE",45.0186548,12.7854969,"Hodeida, Yemen",K,2
+175,6/27/2019,"Aden, Yemen","Fujairah, UAE",2994,Aircraft fuel,56.343384,25.130988,"Fujairah, UAE",45.0186548,12.7854969,"Nishtun, Yemen",K,2
+176,7/10/2019,"Hodeida, Yemen","Al Hamriya, UAE",27000,Diesel,55.503616,25.464044,"Al Hamriya, UAE",42.9708838,14.7909118,"Hodeida, Yemen",S,9
+177,6/27/2019,"Mukalla, Yemen","Sharjah, UAE",9000,Diesel,55.3776082,25.3609963,"Sharjah, UAE",49.127197,14.5404328,"Hodeida, Yemen",W,3
+178,7/7/2019,"Mukalla, Yemen","Fujairah, UAE",9912,Petrol,56.343384,25.130988,"Fujairah, UAE",49.127197,14.5404328,"Hodeida, Yemen",Z,16
+179,7/7/2019,"Hodeida, Yemen","Sarroch, Italy",3853,Gas,9.0108377,39.0654974,"Sarroch, Italy",42.9708838,14.7909118,"Mukalla, Yemen",H,8
+18,12/5/2018,"Mukalla, Yemen",,3396,Diesel,,,,49.127197,14.5404328,"Hodeida, Yemen",,3
+180,7/7/2019,"Mukalla, Yemen","Fujairah, UAE",9992,Diesel,56.343384,25.130988,"Fujairah, UAE",49.127197,14.5404328,"Hodeida, Yemen",Z,16
+181,7/7/2019,"Hodeida, Yemen","Fujairah, UAE",24514,Petrol,56.343384,25.130988,"Fujairah, UAE",42.9708838,14.7909118,"Hodeida, Yemen",T,24
+181,7/7/2019,"Hodeida, Yemen","Fujairah, UAE",5021,Diesel,56.343384,25.130988,"Fujairah, UAE",42.9708838,14.7909118,"Hodeida, Yemen",T,24
+182,7/7/2019,"Aden, Yemen","Taman, Russia",45984,Diesel,36.7102871,45.2120206,"Taman, Russia",45.0186548,12.7854969,"Mukalla, Yemen",K,2
+183,7/7/2019,"Nishtun, Yemen","Sharjah, UAE",2600,Diesel,55.3776082,25.3609963,"Sharjah, UAE",52.1872488,15.8224426,"Mukalla, Yemen",O,5
+184,7/7/2019,"Nishtun, Yemen","Sharjah, UAE",2000,Diesel,55.3776082,25.3609963,"Sharjah, UAE",52.1872488,15.8224426,"Nishtun, Yemen",O,5
+185,7/7/2019,"Mukalla, Yemen","Sharjah, UAE",2350,Diesel,55.3776082,25.3609963,"Sharjah, UAE",49.127197,14.5404328,"Aden, Yemen",O,5
+186,7/10/2019,"Hodeida, Yemen","Sohar, Oman",9748,Petrol,56.613922,24.486524,"Sohar, Oman",42.9708838,14.7909118,"Hodeida, Yemen",J,29
+187,7/10/2019,"Hodeida, Yemen","Sohar, Oman",11519,Diesel,56.613922,24.486524,"Sohar, Oman",42.9708838,14.7909118,"Mukalla, Yemen",J,29
+188,7/12/2019,"Hodeida, Yemen","Fujairah, UAE",31116,Petrol,56.343384,25.130988,"Fujairah, UAE",42.9708838,14.7909118,"Mukalla, Yemen",R,30
+189,7/15/2019,"Mukalla, Yemen","Sharjah, UAE",3821,Mazout,55.3776082,25.3609963,"Sharjah, UAE",49.127197,14.5404328,"Mukalla, Yemen",W,3
+19,12/6/2018,"Nishtun, Yemen",,3100,Diesel,,,,52.1872488,15.8224426,"Mukalla, Yemen",,5
+190,7/17/2019,"Hodeida, Yemen","Jabel Ali, UAE",15010,Petrol,55.0272904,24.9857145,"Jabel Ali, UAE",42.9708838,14.7909118,"Mukalla, Yemen",A,20
+191,7/17/2019,"Hodeida, Yemen","Al Hamriya, UAE",15605,Diesel,55.503616,25.464044,"Al Hamriya, UAE",42.9708838,14.7909118,"Mukalla, Yemen",D,19
+192,7/19/2019,"Mukalla, Yemen","Fujairah, UAE",4000,Diesel,56.343384,25.130988,"Fujairah, UAE",49.127197,14.5404328,"Aden, Yemen",G,5
+193,7/19/2019,"Hodeida, Yemen","Fujairah, UAE",7236,Mazout,56.343384,25.130988,"Fujairah, UAE",42.9708838,14.7909118,"Nishtun, Yemen",A,7
+195,7/22/2019,"Hodeida, Yemen",,9988,Diesel,,,,42.9708838,14.7909118,"Mukalla, Yemen",P,20
+195,7/22/2019,"Hodeida, Yemen",,17176,Petrol,,,,42.9708838,14.7909118,"Nishtun, Yemen",P,20
+196,7/21/2019,"Aden, Yemen","Khor Fakkan, UAE",43434,Mazout,56.3432629,25.3365669,"Khor Fakkan, UAE",45.0186548,12.7854969,"Aden, Yemen",K,2
+197,7/22/2019,"Mukalla, Yemen","Fujairah, UAE",12984,Petrol,56.343384,25.130988,"Fujairah, UAE",49.127197,14.5404328,"Nishtun, Yemen",Z,16
+198,7/22/2019,"Mukalla, Yemen","Sharjah, UAE",8992,Diesel,55.3776082,25.3609963,"Sharjah, UAE",49.127197,14.5404328,"Aden, Yemen",W,3
+199,7/23/2019,"Aden, Yemen","Al Hamriya, UAE",42087,Diesel,55.503616,25.464044,"Al Hamriya, UAE",45.0186548,12.7854969,"Aden, Yemen",K,2
+2,10/20/2018,"Mukalla, Yemen",,8760,Petrol,,,,49.127197,14.5404328,"Aden, Yemen",,3
+20,12/8/2018,"Aden, Yemen",,61449,Petrol,,,,45.0186548,12.7854969,"Mukalla, Yemen",,1
+200,7/23/2019,"Aden, Yemen","Jabel Ali, UAE",60064,Petrol,55.0272904,24.9857145,"Jabel Ali, UAE",45.0186548,12.7854969,"Nishtun, Yemen",K,2
+202,7/25/2019,"Hodeida, Yemen","Fujairah, UAE",4822,Diesel,56.343384,25.130988,"Fujairah, UAE",42.9708838,14.7909118,"Mukalla, Yemen",A,7
+202,7/25/2019,"Hodeida, Yemen","Fujairah, UAE",11165,Mazout,56.343384,25.130988,"Fujairah, UAE",42.9708838,14.7909118,"Mukalla, Yemen",A,7
+203,7/24/2019,"Hodeida, Yemen","Fujairah, UAE",30031,Diesel,56.343384,25.130988,"Fujairah, UAE",42.9708838,14.7909118,"Aden, Yemen",T,24
+204,7/28/2019,"Hodeida, Yemen","Fujairah, UAE",29259,Diesel,56.343384,25.130988,"Fujairah, UAE",42.9708838,14.7909118,"Aden, Yemen",T,24
+205,7/26/2019,"Hodeida, Yemen","Suez Canal OPL, Egypt",8278,Gas,32.675759,29.723123,"Suez Canal OPL, Egypt",42.9708838,14.7909118,"Hodeida, Yemen",M,19
+206,7/31/2019,"Nishtun, Yemen","Sharjah, UAE",2500,Diesel,55.3776082,25.3609963,"Sharjah, UAE",52.1872488,15.8224426,"Hodeida, Yemen",K,23
+207,7/31/2019,"Hodeida, Yemen","Sohar, Oman",20063,Diesel,56.613922,24.486524,"Sohar, Oman",42.9708838,14.7909118,"Mukalla, Yemen",J,29
+207,7/31/2019,"Hodeida, Yemen","Sohar, Oman",10040,Petrol,56.613922,24.486524,"Sohar, Oman",42.9708838,14.7909118,"Nishtun, Yemen",J,29
+208,8/3/2019,"Hodeida, Yemen","Fujairah, UAE",29871,Petrol,56.343384,25.130988,"Fujairah, UAE",42.9708838,14.7909118,"Mukalla, Yemen",T,24
+209,8/8/2019,"Mukalla, Yemen","Al Hamriya, UAE",6055,Diesel,55.503616,25.464044,"Al Hamriya, UAE",49.127197,14.5404328,"Mukalla, Yemen",I,15
+21,12/8/2018,"Nishtun, Yemen",,1550,Petrol,,,,52.1872488,15.8224426,"Hodeida, Yemen",,29
+21,12/8/2018,"Nishtun, Yemen",,841,Diesel,,,,52.1872488,15.8224426,"Hodeida, Yemen",,29
+210,8/8/2019,"Hodeida, Yemen","Fujairah, UAE",29986,Petrol,56.343384,25.130988,"Fujairah, UAE",42.9708838,14.7909118,"Hodeida, Yemen",Z,9
+211,8/4/2019,"Hodeida, Yemen","Fujairah, UAE",28988,Diesel,56.343384,25.130988,"Fujairah, UAE",42.9708838,14.7909118,"Hodeida, Yemen",L,27
+212,8/6/2019,"Hodeida, Yemen","Fujairah, UAE",19800,Petrol,56.343384,25.130988,"Fujairah, UAE",42.9708838,14.7909118,"Hodeida, Yemen",P,20
+212,8/6/2019,"Hodeida, Yemen","Fujairah, UAE",9098,Diesel,56.343384,25.130988,"Fujairah, UAE",42.9708838,14.7909118,"Hodeida, Yemen",P,20
+213,8/7/2019,"Mukalla, Yemen","Fujairah, UAE",11775,Diesel,56.343384,25.130988,"Fujairah, UAE",49.127197,14.5404328,"Hodeida, Yemen",W,3
+214,8/7/2019,"Mukalla, Yemen","Fujairah, UAE",9864,Petrol,56.343384,25.130988,"Fujairah, UAE",49.127197,14.5404328,"Hodeida, Yemen",W,3
+215,8/8/2019,"Nishtun, Yemen","Sharjah, UAE",2000,Diesel,55.3776082,25.3609963,"Sharjah, UAE",52.1872488,15.8224426,"Hodeida, Yemen",K,23
+216,8/8/2019,"Aden, Yemen","Fujairah, UAE",59988,Diesel,56.343384,25.130988,"Fujairah, UAE",45.0186548,12.7854969,"Hodeida, Yemen",K,2
+217,8/8/2019,"Hodeida, Yemen","Fujairah, UAE",29403,Petrol,56.343384,25.130988,"Fujairah, UAE",42.9708838,14.7909118,"Aden, Yemen",T,24
+218,8/13/2019,"Mukalla, Yemen","Fujairah, UAE",8189,Mazout,56.343384,25.130988,"Fujairah, UAE",49.127197,14.5404328,"Aden, Yemen",W,3
+219,8/18/2019,"Mukalla, Yemen","Sharjah, UAE",3871,Diesel,55.3776082,25.3609963,"Sharjah, UAE",49.127197,14.5404328,"Hodeida, Yemen",W,3
+22,12/9/2018,"Hodeida, Yemen",,18010,Petrol,,,,42.9708838,14.7909118,"Hodeida, Yemen",,10
+22,12/9/2018,"Hodeida, Yemen",,9444,Diesel,,,,42.9708838,14.7909118,"Mukalla, Yemen",,10
+221,,"Mukalla, Yemen","Fujairah, UAE",9858,Petrol,56.343384,25.130988,"Fujairah, UAE",49.127197,14.5404328,"Aden, Yemen",W,3
+222,9/5/2019,"Mukalla, Yemen","Fujairah, UAE",10000,Petrol,56.343384,25.130988,"Fujairah, UAE",49.127197,14.5404328,"Aden, Yemen",W,3
+223,9/5/2019,"Mukalla, Yemen","Fujairah, UAE",2500,Diesel,56.343384,25.130988,"Fujairah, UAE",49.127197,14.5404328,"Mukalla, Yemen",G,5
+223,9/5/2019,"Mukalla, Yemen","Fujairah, UAE",2500,Petrol,56.343384,25.130988,"Fujairah, UAE",49.127197,14.5404328,"Mukalla, Yemen",G,5
+224,9/8/2019,"Aden, Yemen","Fujairah, UAE",17991,Diesel,56.343384,25.130988,"Fujairah, UAE",45.0186548,12.7854969,"Nishtun, Yemen",K,1
+225,9/9/2019,"Nishtun, Yemen","Sharjah, UAE",2000,Diesel,55.3776082,25.3609963,"Sharjah, UAE",52.1872488,15.8224426,"Mukalla, Yemen",K,23
+226,9/9/2019,"Mukalla, Yemen","Fujairah, UAE",8192,Mazout,56.343384,25.130988,"Fujairah, UAE",49.127197,14.5404328,"Nishtun, Yemen",W,3
+227,9/10/2019,"Nishtun, Yemen","Fujairah, UAE",2400,Diesel,56.343384,25.130988,"Fujairah, UAE",52.1872488,15.8224426,"Nishtun, Yemen",G,5
+229,9/15/2019,"Aden, Yemen","Fujairah, UAE",11377,Diesel,56.343384,25.130988,"Fujairah, UAE",45.0186548,12.7854969,"Nishtun, Yemen",W,3
+23,12/12/2018,"Hodeida, Yemen",,7610,Diesel,,,,42.9708838,14.7909118,"Mukalla, Yemen",,29
+230,9/15/2019,"Nishtun, Yemen","Fujairah, UAE",4738,Petrol,56.343384,25.130988,"Fujairah, UAE",52.1872488,15.8224426,"Nishtun, Yemen",J,29
+232,9/21/2019,"Aden, Yemen","Fujairah, UAE",59095,Diesel,56.343384,25.130988,"Fujairah, UAE",45.0186548,12.7854969,"Aden, Yemen",B,2
+233,9/24/2019,"Aden, Yemen","Fujairah, UAE",34341,Diesel,56.343384,25.130988,"Fujairah, UAE",45.0186548,12.7854969,"Nishtun, Yemen",K,1
+234,9/25/2019,"Aden, Yemen","Yanbu, Saudi Arabia",38490,Diesel,38.1899782,24.0231757,"Yanbu, Saudi Arabia",45.0186548,12.7854969,"Nishtun, Yemen",B,2
+235,9/25/2019,"Mukalla, Yemen","Sharjah, UAE",3514,Diesel,55.3776082,25.3609963,"Sharjah, UAE",49.127197,14.5404328,"Aden, Yemen",W,3
+236,9/25/2019,"Nishtun, Yemen","Sharjah, UAE",2830,Diesel,55.3776082,25.3609963,"Sharjah, UAE",52.1872488,15.8224426,"Nishtun, Yemen",J,29
+237,9/25/2019,"Mukalla, Yemen",,3612,Diesel,,,,49.127197,14.5404328,"Hodeida, Yemen",L,15
+238,10/1/2019,"Mukalla, Yemen","Jabel Ali, UAE",9998,Petrol,55.0272904,24.9857145,"Jabel Ali, UAE",49.127197,14.5404328,"Mukalla, Yemen",A,3
+239,10/3/2019,"Mukalla, Yemen","Fujairah, UAE",2500,Diesel,56.343384,25.130988,"Fujairah, UAE",49.127197,14.5404328,"Hodeida, Yemen",G,5
+24,12/12/2018,"Hodeida, Yemen",,10496,Mazout,,,,42.9708838,14.7909118,"Hodeida, Yemen",,7
+24,12/12/2018,"Hodeida, Yemen",,5087,Diesel,,,,42.9708838,14.7909118,"Hodeida, Yemen",,7
+240,10/5/2019,"Aden, Yemen","Fujairah, UAE",6595,Diesel,56.343384,25.130988,"Fujairah, UAE",45.0186548,12.7854969,"Hodeida, Yemen",K,1
+240,10/5/2019,"Aden, Yemen","Fujairah, UAE",1837,Aircraft fuel,56.343384,25.130988,"Fujairah, UAE",45.0186548,12.7854969,"Mukalla, Yemen",K,1
+241,10/15/2019,"Hodeida, Yemen","Fujairah, UAE",2428,Diesel,56.343384,25.130988,"Fujairah, UAE",42.9708838,14.7909118,"Mukalla, Yemen",A,7
+241,10/15/2019,"Hodeida, Yemen","Fujairah, UAE",13499,Mazout,56.343384,25.130988,"Fujairah, UAE",42.9708838,14.7909118,"Hodeida, Yemen",A,7
+242,10/7/2019,"Mukalla, Yemen","Al Hamriya, UAE",11466,Diesel,55.503616,25.464044,"Al Hamriya, UAE",49.127197,14.5404328,"Hodeida, Yemen",W,3
+243,10/8/2019,"Nishtun, Yemen","Al Hamriya, UAE",4145,Diesel,55.503616,25.464044,"Al Hamriya, UAE",52.1872488,15.8224426,"Hodeida, Yemen",W,23
+244,10/8/2019,"Mukalla, Yemen","Fujairah, UAE",5000,Petrol,56.343384,25.130988,"Fujairah, UAE",49.127197,14.5404328,"Nishtun, Yemen",G,5
+245,10/14/2019,"Mukalla, Yemen","Al Hamriya, UAE",6451,Diesel,55.503616,25.464044,"Al Hamriya, UAE",49.127197,14.5404328,"Hodeida, Yemen",L,3
+247,10/16/2019,"Hodeida, Yemen","Jabel Ali, UAE",27021,Petrol,55.0272904,24.9857145,"Jabel Ali, UAE",42.9708838,14.7909118,"Nishtun, Yemen",P,20
+248,10/16/2019,"Hodeida, Yemen","Fujairah, UAE",9996,Diesel,56.343384,25.130988,"Fujairah, UAE",42.9708838,14.7909118,"Mukalla, Yemen",T,24
+248,10/16/2019,"Hodeida, Yemen","Fujairah, UAE",19501,Petrol,56.343384,25.130988,"Fujairah, UAE",42.9708838,14.7909118,"Mukalla, Yemen",T,24
+249,10/16/2019,"Hodeida, Yemen","Fujairah, UAE",29642,Diesel,56.343384,25.130988,"Fujairah, UAE",42.9708838,14.7909118,"Aden, Yemen",T,24
+25,12/12/2018,"Mukalla, Yemen",,10200,Diesel,,,,49.127197,14.5404328,"Mukalla, Yemen",,22
+250,10/16/2019,"Hodeida, Yemen","Fujairah, UAE",20003,Diesel,56.343384,25.130988,"Fujairah, UAE",42.9708838,14.7909118,"Hodeida, Yemen",T,24
+250,10/16/2019,"Hodeida, Yemen","Fujairah, UAE",9984,Petrol,56.343384,25.130988,"Fujairah, UAE",42.9708838,14.7909118,"Aden, Yemen",T,24
+251,10/16/2019,"Hodeida, Yemen","Fujairah, UAE",11178,Diesel,56.343384,25.130988,"Fujairah, UAE",42.9708838,14.7909118,"Aden, Yemen",L,27
+252,9/16/2019,"Hodeida, Yemen","Fujairah, UAE",10937,Diesel,56.343384,25.130988,"Fujairah, UAE",42.9708838,14.7909118,"Nishtun, Yemen",J,29
+253,,"Hodeida, Yemen","Al Hamriya, UAE",10817,Diesel,55.503616,25.464044,"Al Hamriya, UAE",42.9708838,14.7909118,"Hodeida, Yemen",J,29
+254,10/16/2019,"Hodeida, Yemen","Fujairah, UAE",26915,Petrol,56.343384,25.130988,"Fujairah, UAE",42.9708838,14.7909118,"Mukalla, Yemen",E,6
+255,10/18/2019,"Aden, Yemen","Fujairah, UAE",7893,Diesel,56.343384,25.130988,"Fujairah, UAE",45.0186548,12.7854969,"Aden, Yemen",L,27
+256,10/20/2019,"Aden, Yemen","Al Hamriya, UAE",29152,Petrol,55.503616,25.464044,"Al Hamriya, UAE",45.0186548,12.7854969,"Hodeida, Yemen",K,1
+257,10/20/2019,"Hodeida, Yemen","Al Hamriya, UAE",10406,Diesel,55.503616,25.464044,"Al Hamriya, UAE",42.9708838,14.7909118,"Hodeida, Yemen",,17
+257,10/20/2019,"Hodeida, Yemen","Al Hamriya, UAE",12910,Petrol,55.503616,25.464044,"Al Hamriya, UAE",42.9708838,14.7909118,"Hodeida, Yemen",,17
+258,10/21/2019,"Mukalla, Yemen","Sohar, Oman",7114,Petrol,56.613922,24.486524,"Sohar, Oman",49.127197,14.5404328,"Aden, Yemen",W,3
+259,10/23/2019,"Aden, Yemen","Jabel Ali, UAE",35716,Diesel,55.0272904,24.9857145,"Jabel Ali, UAE",45.0186548,12.7854969,"Aden, Yemen",K,1
+259,10/23/2019,"Aden, Yemen","Jabel Ali, UAE",4999,Aircraft fuel,55.0272904,24.9857145,"Jabel Ali, UAE",45.0186548,12.7854969,"Aden, Yemen",K,1
+26,12/13/2018,"Mukalla, Yemen",,10037,Petrol,,,,49.127197,14.5404328,"Aden, Yemen",,16
+260,10/23/2019,"Mukalla, Yemen","Fujairah, UAE",11414,Diesel,56.343384,25.130988,"Fujairah, UAE",49.127197,14.5404328,"Hodeida, Yemen",W,3
+261,10/23/2019,"Mukalla, Yemen","Al Hamriya, UAE",5000,Diesel,55.503616,25.464044,"Al Hamriya, UAE",49.127197,14.5404328,"Mukalla, Yemen",X,12
+262,10/26/2019,"Nishtun, Yemen","Sharjah, UAE",3360,Diesel,55.3776082,25.3609963,"Sharjah, UAE",52.1872488,15.8224426,"Nishtun, Yemen",W,3
+263,10/26/2019,"Mukalla, Yemen","Fujairah, UAE",9800,Petrol,56.343384,25.130988,"Fujairah, UAE",49.127197,14.5404328,"Nishtun, Yemen",W,3
+264,10/26/2019,"Nishtun, Yemen","Al Hamriya, UAE",1500,Diesel,55.503616,25.464044,"Al Hamriya, UAE",52.1872488,15.8224426,"Mukalla, Yemen",,23
+265,10/26/2019,"Nishtun, Yemen","Al Hamriya, UAE",2009,Diesel,55.503616,25.464044,"Al Hamriya, UAE",52.1872488,15.8224426,"Aden, Yemen",,23
+266,10/28/2019,"Nishtun, Yemen","Sharjah, UAE",2495,Petrol,55.3776082,25.3609963,"Sharjah, UAE",52.1872488,15.8224426,"Hodeida, Yemen",J,29
+267,10/31/2019,"Mukalla, Yemen","Al Hamriya, UAE",16362,Diesel,55.503616,25.464044,"Al Hamriya, UAE",49.127197,14.5404328,"Hodeida, Yemen",W,3
+268,10/31/2019,"Nishtun, Yemen","Fujairah, UAE",2400,Diesel,56.343384,25.130988,"Fujairah, UAE",52.1872488,15.8224426,"Hodeida, Yemen",G,5
+269,10/31/2019,"Aden, Yemen","Fujairah, UAE",37883,Diesel,56.343384,25.130988,"Fujairah, UAE",45.0186548,12.7854969,"Hodeida, Yemen",K,1
+27,12/14/2018,"Mukalla, Yemen",,6183,Diesel,,,,49.127197,14.5404328,"Hodeida, Yemen",,15
+271,11/4/2019,"Nishtun, Yemen","Al Hamriya, UAE",2500,Diesel,55.503616,25.464044,"Al Hamriya, UAE",52.1872488,15.8224426,"Hodeida, Yemen",G,5
+272,11/4/2019,"Nishtun, Yemen","Fujairah, UAE",2500,Diesel,56.343384,25.130988,"Fujairah, UAE",52.1872488,15.8224426,"Hodeida, Yemen",G,5
+273,11/6/2019,"Aden, Yemen","Fujairah, UAE",8083,Mazout,56.343384,25.130988,"Fujairah, UAE",45.0186548,12.7854969,"Hodeida, Yemen",F,5
+274,11/6/2019,"Nishtun, Yemen","Sharjah, UAE",5852,Diesel,55.3776082,25.3609963,"Sharjah, UAE",52.1872488,15.8224426,"Mukalla, Yemen",J,29
+275,11/8/2019,"Hodeida, Yemen","Fujairah, UAE",10995,Diesel,56.343384,25.130988,"Fujairah, UAE",42.9708838,14.7909118,"Mukalla, Yemen",L,27
+276,11/8/2019,"Mukalla, Yemen","Fujairah, UAE",7190,Mazout,56.343384,25.130988,"Fujairah, UAE",49.127197,14.5404328,"Hodeida, Yemen",W,3
+277,11/10/2019,"Hodeida, Yemen","Al Hamriya, UAE",19802,Petrol,55.503616,25.464044,"Al Hamriya, UAE",42.9708838,14.7909118,"Hodeida, Yemen",E,9
+278,11/10/2019,"Hodeida, Yemen","Al Hamriya, UAE",29528,Diesel,55.503616,25.464044,"Al Hamriya, UAE",42.9708838,14.7909118,"Mukalla, Yemen",T,24
+279,11/10/2019,"Hodeida, Yemen","Al Hamriya, UAE",17363,Diesel,55.503616,25.464044,"Al Hamriya, UAE",42.9708838,14.7909118,"Aden, Yemen",E,9
+28,12/17/2018,"Hodeida, Yemen",,14179,Petrol,,,,42.9708838,14.7909118,"Mukalla, Yemen",,7
+280,11/10/2019,"Hodeida, Yemen","Fujairah, UAE",29971,Diesel,56.343384,25.130988,"Fujairah, UAE",42.9708838,14.7909118,"Mukalla, Yemen",P,20
+281,11/13/2019,"Mukalla, Yemen","Al Hamriya, UAE",4066,Diesel,55.503616,25.464044,"Al Hamriya, UAE",49.127197,14.5404328,"Nishtun, Yemen",L,15
+282,11/13/2019,"Mukalla, Yemen","Sharjah, UAE",3000,Diesel,55.3776082,25.3609963,"Sharjah, UAE",49.127197,14.5404328,"Aden, Yemen",L,18
+283,11/18/2019,"Hodeida, Yemen","Fujairah, UAE",13318,Mazout,56.343384,25.130988,"Fujairah, UAE",42.9708838,14.7909118,,A,7
+283,11/18/2019,"Hodeida, Yemen","Fujairah, UAE",2491,Diesel,56.343384,25.130988,"Fujairah, UAE",42.9708838,14.7909118,,A,7
+284,10/16/2019,"Hodeida, Yemen","Fujairah, UAE",29932,Petrol,56.343384,25.130988,"Fujairah, UAE",42.9708838,14.7909118,,T,24
+285,11/22/2019,"Nishtun, Yemen","Sharjah, UAE",2400,Diesel,55.3776082,25.3609963,"Sharjah, UAE",52.1872488,15.8224426,,G,23
+286,11/18/2019,"Hodeida, Yemen","Jabel Ali, UAE",21022,Petrol,55.0272904,24.9857145,"Jabel Ali, UAE",42.9708838,14.7909118,,A,14
+287,11/18/2019,"Nishtun, Yemen","Al Hamriya, UAE",3760,Diesel,55.503616,25.464044,"Al Hamriya, UAE",52.1872488,15.8224426,,E,6
+288,11/18/2019,"Mukalla, Yemen","Sohar, Oman",7092,Petrol,56.613922,24.486524,"Sohar, Oman",49.127197,14.5404328,,W,3
+29,12/16/2018,"Nishtun, Yemen",,5000,Petrol,,,,52.1872488,15.8224426,,,4
+290,11/22/2019,"Mukalla, Yemen","Fujairah, UAE",11618,Diesel,56.343384,25.130988,"Fujairah, UAE",49.127197,14.5404328,,W,3
+291,11/22/2019,"Aden, Yemen","Al Hamriya, UAE",37475,Petrol,55.503616,25.464044,"Al Hamriya, UAE",45.0186548,12.7854969,,K,1
+292,11/26/2019,"Mukalla, Yemen","Sharjah, UAE",7500,Diesel,55.3776082,25.3609963,"Sharjah, UAE",49.127197,14.5404328,,G,5
+293,11/27/2019,"Hodeida, Yemen","Al Hamriya, UAE",29694,Diesel,55.503616,25.464044,"Al Hamriya, UAE",42.9708838,14.7909118,,T,24
+294,12/3/2019,"Aden, Yemen","Sharjah, UAE",2790,Diesel,55.3776082,25.3609963,"Sharjah, UAE",45.0186548,12.7854969,,X,26
+295,12/3/2019,"Aden, Yemen","Al Hamriya, UAE",2472,Diesel,55.503616,25.464044,"Al Hamriya, UAE",45.0186548,12.7854969,,X,26
+296,11/29/2019,"Nishtun, Yemen","Sharjah, UAE",3420,Diesel,55.3776082,25.3609963,"Sharjah, UAE",52.1872488,15.8224426,,W,32
+297,12/5/2019,"Hodeida, Yemen","Fujairah, UAE",29929,Petrol,56.343384,25.130988,"Fujairah, UAE",42.9708838,14.7909118,,T,24
+298,12/10/2019,"Mukalla, Yemen","Al Hamriya, UAE",11964,Diesel,55.503616,25.464044,"Al Hamriya, UAE",49.127197,14.5404328,,W,3
+298,12/5/2019,"Aden, Yemen","Fujairah, UAE",42812,Diesel,56.343384,25.130988,"Fujairah, UAE",45.0186548,12.7854969,,K,1
+299,12/11/2019,"Hodeida, Yemen","Fujairah, UAE",9993,Diesel,56.343384,25.130988,"Fujairah, UAE",42.9708838,14.7909118,,P,20
+299,12/11/2019,"Hodeida, Yemen","Fujairah, UAE",17472,Petrol,56.343384,25.130988,"Fujairah, UAE",42.9708838,14.7909118,,P,20
+3,10/20/2018,"Hodeida, Yemen",,10026,Petrol,,,,42.9708838,14.7909118,,,10
+3,10/20/2018,"Hodeida, Yemen",,17497,Diesel,,,,42.9708838,14.7909118,,,10
+30,12/18/2018,"Hodeida, Yemen",,29646,Diesel,,,,42.9708838,14.7909118,,,24
+302,12/12/2019,"Hodeida, Yemen","Al Hamriya, UAE",27672,Diesel,55.503616,25.464044,"Al Hamriya, UAE",42.9708838,14.7909118,,E,6
+304,12/14/2019,"Aden, Yemen","Fujairah, UAE",19994,Diesel,56.343384,25.130988,"Fujairah, UAE",45.0186548,12.7854969,,Z,16
+304,12/14/2019,"Aden, Yemen","Fujairah, UAE",19729,Petrol,56.343384,25.130988,"Fujairah, UAE",45.0186548,12.7854969,,Z,16
+305,12/14/2019,"Aden, Yemen","Sharjah, UAE",42279,Mazout,55.3776082,25.3609963,"Sharjah, UAE",45.0186548,12.7854969,,K,1
+306,12/18/2019,"Aden, Yemen","Port Khalid, UAE",37822,Diesel,55.3776082,25.3609963,"Port Khalid, UAE",45.0186548,12.7854969,,K,1
+307,12/16/2019,"Hodeida, Yemen","Jabel Ali, UAE",28994,Diesel,55.0272904,24.9857145,"Jabel Ali, UAE",42.9708838,14.7909118,,P,20
+309,12/18/2019,"Mukalla, Yemen","Jabel Ali, UAE",10000,Petrol,55.0272904,24.9857145,"Jabel Ali, UAE",49.127197,14.5404328,,W,3
+31,12/18/2018,"Hodeida, Yemen",,14747,Diesel,,,,42.9708838,14.7909118,,,29
+310,12/25/2019,"Nishtun, Yemen","Sharjah, UAE",3875,Diesel,55.3776082,25.3609963,"Sharjah, UAE",52.1872488,15.8224426,,W,31
+311,12/25/2019,"Nishtun, Yemen","Al Hamriya, UAE",2500,Diesel,55.503616,25.464044,"Al Hamriya, UAE",52.1872488,15.8224426,,W,23
+312,12/27/2019,"Mukalla, Yemen","Fujairah, UAE",16978,Diesel,56.343384,25.130988,"Fujairah, UAE",49.127197,14.5404328,,Z,16
+313,1/2/2020,"Aden, Yemen","Khor Fakkan, UAE",39950,Diesel,56.3432629,25.3365669,"Khor Fakkan, UAE",45.0186548,12.7854969,,K,1
+314,1/3/2020,"Hodeida, Yemen","Fujairah, UAE",29981,Petrol,56.343384,25.130988,"Fujairah, UAE",42.9708838,14.7909118,,T,24
+315,1/3/2020,"Hodeida, Yemen","Fujairah, UAE",2494,Diesel,56.343384,25.130988,"Fujairah, UAE",42.9708838,14.7909118,,A,7
+315,1/3/2020,"Hodeida, Yemen","Fujairah, UAE",13582,Mazout,56.343384,25.130988,"Fujairah, UAE",42.9708838,14.7909118,,A,7
+317,1/8/2020,"Hodeida, Yemen","Al Hamriya, UAE",17394,Diesel,55.503616,25.464044,"Al Hamriya, UAE",42.9708838,14.7909118,,J,29
+317,1/8/2020,"Hodeida, Yemen","Al Hamriya, UAE",12307,Petrol,55.503616,25.464044,"Al Hamriya, UAE",42.9708838,14.7909118,,J,29
+318,1/8/2020,"Hodeida, Yemen","Fujairah, UAE",18915,Diesel,56.343384,25.130988,"Fujairah, UAE",42.9708838,14.7909118,,L,27
+319,1/8/2020,"Hodeida, Yemen","Al Hamriya, UAE",17019,Diesel,55.503616,25.464044,"Al Hamriya, UAE",42.9708838,14.7909118,,,17
+319,1/8/2020,"Hodeida, Yemen","Al Hamriya, UAE",12580,Petrol,55.503616,25.464044,"Al Hamriya, UAE",42.9708838,14.7909118,,,17
+32,12/31/2018,"Nishtun, Yemen",,4754,Diesel,,,,52.1872488,15.8224426,,,29
+320,1/9/2020,"Mukalla, Yemen","Al Hamriya, UAE",4245,Diesel,55.503616,25.464044,"Al Hamriya, UAE",49.127197,14.5404328,,X,26
+321,1/9/2020,"Mukalla, Yemen","Sharjah, UAE",6676,Diesel,55.3776082,25.3609963,"Sharjah, UAE",49.127197,14.5404328,,W,3
+322,1/12/2020,"Hodeida, Yemen","Al Hamriya, UAE",20200,Petrol,55.503616,25.464044,"Al Hamriya, UAE",42.9708838,14.7909118,,E,9
+322,1/12/2020,"Hodeida, Yemen","Al Hamriya, UAE",10475,Diesel,55.503616,25.464044,"Al Hamriya, UAE",42.9708838,14.7909118,,E,9
+324,1/3/2020,"Mukalla, Yemen","Fujairah, UAE",10288,Petrol,56.343384,25.130988,"Fujairah, UAE",49.127197,14.5404328,,W,3
+325,1/13/2020,"Aden, Yemen","Al Hamriya, UAE",28944,Diesel,55.503616,25.464044,"Al Hamriya, UAE",45.0186548,12.7854969,,K,21
+326,1/14/2020,"Mukalla, Yemen","Fujairah, UAE",7700,Mazout,56.343384,25.130988,"Fujairah, UAE",49.127197,14.5404328,,G,5
+328,1/28/2020,"Mukalla, Yemen","Sharjah, UAE",5500,Diesel,55.3776082,25.3609963,"Sharjah, UAE",49.127197,14.5404328,,L,18
+33,12/18/2018,"Mukalla, Yemen",,2698,Diesel,,,,49.127197,14.5404328,,,3
+331,1/23/2020,"Nishtun, Yemen","Al Hamriya, UAE",2551,Diesel,55.503616,25.464044,"Al Hamriya, UAE",52.1872488,15.8224426,,G,
+332,1/28/2020,"Aden, Yemen","Khor Fakkan, UAE",34916,Petrol,56.3432629,25.3365669,"Khor Fakkan, UAE",45.0186548,12.7854969,,K,1
+34,12/26/2018,"Mukalla, Yemen",,4700,Diesel,,,,49.127197,14.5404328,,,5
+35,12/26/2018,"Mukalla, Yemen",,6500,Diesel,,,,49.127197,14.5404328,,,5
+36,12/26/2018,"Mukalla, Yemen",,9924,Petrol,,,,49.127197,14.5404328,,,3
+37,12/26/2018,"Mukalla, Yemen",,10998,Diesel,,,,49.127197,14.5404328,,,16
+38,12/27/2018,"Mukalla, Yemen",,4775,Mazout,,,,49.127197,14.5404328,,,3
+39,12/29/2018,"Mukalla, Yemen",,3445,Diesel,,,,49.127197,14.5404328,,,3
+4,10/20/2018,"Hodeida, Yemen",,7498,Petrol,,,,42.9708838,14.7909118,,,10
+40,12/30/2018,"Nishtun, Yemen",,2821,Diesel,,,,52.1872488,15.8224426,,,29
+41,12/31/2018,"Nishtun, Yemen",,2600,Diesel,,,,52.1872488,15.8224426,,,5
+42,1/1/2019,"Mukalla, Yemen",,4330,Diesel,,,,49.127197,14.5404328,,,3
+43,1/10/2019,"Hodeida, Yemen",,11461,Diesel,,,,42.9708838,14.7909118,,,29
+44,1/9/2019,"Mukalla, Yemen",,9834,Petrol,,,,49.127197,14.5404328,,,3
+45,1/10/2019,"Hodeida, Yemen",,27665,Petrol,,,,42.9708838,14.7909118,,,13
+46,1/10/2019,"Hodeida, Yemen",,10897,Petrol,,,,42.9708838,14.7909118,,,7
+46,1/10/2019,"Hodeida, Yemen",,8454,Diesel,,,,42.9708838,14.7909118,,,7
+47,1/10/2019,"Hodeida, Yemen",,17954,Petrol,,,,42.9708838,14.7909118,,,10
+47,1/10/2019,"Hodeida, Yemen",,9492,Diesel,,,,42.9708838,14.7909118,,,10
+48,1/11/2019,"Nishtun, Yemen",,3700,Diesel,,,,52.1872488,15.8224426,,,18
+49,1/11/2019,"Mukalla, Yemen",,5500,Diesel,,,,49.127197,14.5404328,,,5
+50,1/11/2019,"Mukalla, Yemen",,4536,Diesel,,,,49.127197,14.5404328,,,3
+51,1/14/2019,"Hodeida, Yemen",,11000,Diesel,,,,42.9708838,14.7909118,,,14
+51,1/14/2019,"Hodeida, Yemen",,10000,Petrol,,,,42.9708838,14.7909118,,,14
+52,1/15/2019,"Mukalla, Yemen",,4970,Petrol,,,,49.127197,14.5404328,,,6
+53,1/16/2019,"Hodeida, Yemen",,23958,Petrol,,,,42.9708838,14.7909118,,,24
+54,1/16/2019,"Mukalla, Yemen",,10000,Petrol,,,,49.127197,14.5404328,,,16
+55,1/16/2019,"Aden, Yemen",,36545,Petrol,,,,45.0186548,12.7854969,,,1
+55,1/16/2019,"Aden, Yemen",,1297,Aircraft fuel,,,,45.0186548,12.7854969,,,1
+56,1/17/2019,"Aden, Yemen",,4488,Diesel,,,,45.0186548,12.7854969,,,1
+57,1/17/2019,"Aden, Yemen",,5078,Diesel,,,,45.0186548,12.7854969,,,1
+58,1/21/2019,"Mukalla, Yemen",,9859,Petrol,,,,49.127197,14.5404328,,,3
+59,1/22/2019,"Mukalla, Yemen",,2718,Diesel,,,,49.127197,14.5404328,,,3
+6,10/26/2018,"Nishtun, Yemen",,23760,Diesel,,,,52.1872488,15.8224426,,,3
+60,1/22/2019,"Mukalla, Yemen",,6200,Diesel,,,,49.127197,14.5404328,,,5
+61,1/22/2019,"Hodeida, Yemen",,4725,Gas,,,,42.9708838,14.7909118,,,19
+62,1/24/2019,"Aden, Yemen",,4679,Aircraft fuel,,,,45.0186548,12.7854969,,,2
+63,1/26/2019,"Aden, Yemen",,67707,Diesel,,,,45.0186548,12.7854969,,,2
+64,1/26/2019,"Hodeida, Yemen",,12572,Mazout,,,,42.9708838,14.7909118,,,7
+64,1/26/2019,"Hodeida, Yemen",,3120,Diesel,,,,42.9708838,14.7909118,,,7
+65,1/29/2019,"Hodeida, Yemen",,22039,Petrol,,,,42.9708838,14.7909118,,,24
+65,1/29/2019,"Hodeida, Yemen",,7401,Diesel,,,,42.9708838,14.7909118,,,24
+66,1/27/2019,"Nishtun, Yemen",,2400,Diesel,,,,52.1872488,15.8224426,,,5
+67,1/28/2019,"Mukalla, Yemen",,3414,Diesel,,,,49.127197,14.5404328,,,3
+68,1/29/2019,"Hodeida, Yemen",,30025,Diesel,,,,42.9708838,14.7909118,,,24
+69,2/1/2019,"Mukalla, Yemen",,2300,Diesel,,,,49.127197,14.5404328,,,5
+7,10/29/2018,"Hodeida, Yemen",,30432,Diesel,,,,42.9708838,14.7909118,,,24
+7,10/29/2018,"Hodeida, Yemen",,,Petrol,,,,42.9708838,14.7909118,,,24
+70,2/4/2019,"Hodeida, Yemen",,20641,Diesel,,,,42.9708838,14.7909118,,,10
+71,2/7/2019,"Mukalla, Yemen",,11873,Diesel,,,,49.127197,14.5404328,,,3
+72,2/11/2019,"Aden, Yemen",,5000,Diesel,,,,45.0186548,12.7854969,,,27
+73,2/15/2019,"Aden, Yemen",,61001,Petrol,,,,45.0186548,12.7854969,,,2
+74,2/15/2019,"Hodeida, Yemen",,10280,Petrol,,,,42.9708838,14.7909118,,,10
+74,2/15/2019,"Hodeida, Yemen",,17398,Diesel,,,,42.9708838,14.7909118,,,10
+75,2/21/2019,"Hodeida, Yemen",,11981,Diesel,,,,42.9708838,14.7909118,,,27
+76,2/21/2019,"Hodeida, Yemen",,11509,Diesel,,,,42.9708838,14.7909118,,,29
+77,2/23/2019,"Hodeida, Yemen",,13578,Diesel,,,,42.9708838,14.7909118,,,29
+77,2/23/2019,"Hodeida, Yemen",,5696,Petrol,,,,42.9708838,14.7909118,,,29
+78,2/23/2019,"Mukalla, Yemen",,9970,Petrol,,,,49.127197,14.5404328,,,3
+79,2/23/2019,"Hodeida, Yemen",,24132,Petrol,,,,42.9708838,14.7909118,,,24
+8,11/2/2018,"Hodeida, Yemen",,17510,Diesel,,,,42.9708838,14.7909118,,,19
+8,11/2/2018,"Hodeida, Yemen",,,,,,,42.9708838,14.7909118,,,19
+80,2/25/2019,"Mukalla, Yemen",,3951,Mazout,,,,49.127197,14.5404328,,,3
+81,3/1/2019,"Hodeida, Yemen",,4800,Gas,,,,42.9708838,14.7909118,,,19
+82,3/3/2019,"Aden, Yemen",,60036,Diesel,,,,45.0186548,12.7854969,,,2
+83,3/6/2019,"Nishtun, Yemen",,3100,Diesel,,,,52.1872488,15.8224426,,,5
+84,3/6/2019,"Hodeida, Yemen",,25162,Diesel,,,,42.9708838,14.7909118,,,21
+85,3/7/2019,"Hodeida, Yemen",,10824,Diesel,,,,42.9708838,14.7909118,,,14
+86,3/7/2019,"Mukalla, Yemen",,7136,Diesel,,,,49.127197,14.5404328,,,3
+87,3/7/2019,"Hodeida, Yemen",,15696,Petrol,,,,42.9708838,14.7909118,,,7
+88,3/8/2019,"Hodeida, Yemen",,13608,Petrol,,,,42.9708838,14.7909118,,,13
+89,3/10/2019,"Mukalla, Yemen",,2178,Diesel,,,,49.127197,14.5404328,,,3
+9,11/5/2018,"Aden, Yemen",,15426,Diesel,,,,45.0186548,12.7854969,,,27
+90,3/13/2019,"Nishtun, Yemen",,3100,Diesel,,,,52.1872488,15.8224426,,,5
+91,3/15/2019,"Nishtun, Yemen",,2900,Diesel,,,,52.1872488,15.8224426,,,5
+92,3/15/2019,"Hodeida, Yemen",,11631,Diesel,,,,42.9708838,14.7909118,,,29
+93,3/18/2019,"Nishtun, Yemen",,4000,Diesel,,,,52.1872488,15.8224426,,,5
+94,3/18/2019,"Hodeida, Yemen",,20896,Diesel,,,,42.9708838,14.7909118,,,9
+95,3/19/2019,"Hodeida, Yemen",,30834,Diesel,,,,42.9708838,14.7909118,,,24
+96,3/21/2019,"Mukalla, Yemen",,2238,Diesel,,,,49.127197,14.5404328,,,3
+97,3/24/2019,"Nishtun, Yemen",,4200,Diesel,,,,52.1872488,15.8224426,,,5
+98,3/23/2019,"Hodeida, Yemen",,30564,Petrol,,,,42.9708838,14.7909118,,,7
+99,3/23/2019,"Hodeida, Yemen",,29992,Diesel,,,,42.9708838,14.7909118,,,24
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
