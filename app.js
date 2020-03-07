@@ -5,14 +5,13 @@ import { render } from 'react-dom';
 import { StaticMap } from 'react-map-gl';
 import DeckGL from '@deck.gl/react';
 import { ScatterplotLayer, ArcLayer } from '@deck.gl/layers';
-import csvData from './assets/data.csv';
+import csvData from './assets/data2.csv';
 import $ from 'jquery';
 import * as d3 from "d3";
 import Slider from 'omni-slider';
 import ResizeObserver from "resize-observer-polyfill";
 
 
-import { Multiselect } from 'multiselect-react-dropdown';
 
 import MyExpansionPanel from '@material-ui/core/ExpansionPanel';
 import MyExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
@@ -25,6 +24,9 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 
+import { Picky } from 'react-picky';
+import 'react-picky/dist/picky.css'; // Include CSS
+
 
 const analyticsFontColor = '#c7c7c7';
 
@@ -32,6 +34,8 @@ const ExpansionPanel = withStyles({
   root: {
   },
 })(MyExpansionPanel);
+
+
 
 const ExpansionPanelSummary = withStyles(theme => ({
   root: {
@@ -82,6 +86,8 @@ let graphDom = document.getElementById('graph');
 
 const parseDate = d3.timeParse("%m/%d/%Y, %I:%M:%S %p");
 
+const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
 
 export default class App extends Component {
 
@@ -97,26 +103,6 @@ export default class App extends Component {
     this._fuelAmount = 0;
     this._shipments = 0;
     this._involvedPorts = 0;
-
-    this.filterSelectStyle = {
-      chips: {
-        background: "#5f5f5f",
-        "borderRadius": "5px"
-      },
-      searchBox: {
-        border: "#5f5f5f",
-        "borderBottom": "1px solid #5f5f5f",
-        "borderRadius": "0px"
-      },
-      multiselectContainer: {
-        color: "#5f5f5f",
-        background: "#343434"
-      },
-      optionContainer: {
-        color: "white",
-        background: "#5f5f5f"
-      }
-    };
 
     //Filter options
     this._filterOptionsImporter = [];
@@ -143,12 +129,20 @@ export default class App extends Component {
     this._onFilterByEstMonth = this._onFilterByEstMonth.bind(this);
     this._onFilterByFuelType = this._onFilterByFuelType.bind(this);
 
+    this._arcTooltip = this._arcTooltip.bind(this);
+    this._scatterplotTooltip = this._scatterplotTooltip.bind(this);
+
 
 
     this.deckGL = React.createRef();
 
     //Pre-processing data
-    this.csvData = csvData.filter(obj => obj.decision_date !== null);
+    // this.csvData = csvData.filter(obj => obj.decision_date !== null);
+    this.csvData = csvData;
+
+    //Sort by date
+    this.csvData.sort((a, b) => a.application_num - b.application_num);
+
 
     //Filtered Data
     this.filteredDataImporter = this.csvData;
@@ -222,6 +216,7 @@ export default class App extends Component {
 
     this._histogram(this.finalData);
 
+    this._analytics(this.finalData);
 
     this._getFilterOptions();
 
@@ -278,7 +273,7 @@ export default class App extends Component {
 
       //exporter
       const exporter = this.csvData[i].exporter_proxy;
-      if(exporter !== null){
+      if (exporter !== null) {
         if (exporter in ExporterJson) {
         } else {
           ExporterJson[exporter] = {
@@ -290,7 +285,7 @@ export default class App extends Component {
 
       //Origin
       const origin = this.csvData[i].Origin;
-      if(origin !== null){
+      if (origin !== null) {
         if (origin in OriginJson) {
         } else {
           OriginJson[origin] = {
@@ -302,7 +297,7 @@ export default class App extends Component {
 
       //Dest
       const dest = this.csvData[i].Destination;
-      if(dest !== null){
+      if (dest !== null) {
         if (dest in DestJson) {
         } else {
           DestJson[dest] = {
@@ -313,8 +308,9 @@ export default class App extends Component {
       }
 
       //Est month
-      const estMonth = new Date(this.csvData[i].decision_date).getMonth().toLocaleString();
-      if(estMonth !== null){
+      let estMonth = this.csvData[i].decision_date;
+      if (estMonth !== null) {
+        estMonth = monthNames[new Date(this.csvData[i].decision_date).getMonth()] + " " + new Date(this.csvData[i].decision_date).getFullYear();
         if (estMonth in EstMonthJson) {
         } else {
           EstMonthJson[estMonth] = {
@@ -326,7 +322,7 @@ export default class App extends Component {
 
       //Fuel type
       const fuelType = this.csvData[i].fuel_type_clean_EN;
-      if(fuelType !== null){
+      if (fuelType !== null) {
         if (fuelType in FuelTypeJson) {
         } else {
           FuelTypeJson[fuelType] = {
@@ -459,6 +455,7 @@ export default class App extends Component {
     this.filteredDataByDate = filteredData;
 
     //Draw data
+    this._analytics(filteredData);
     this.arcData = this._getArcData(filteredData);
     this.scatterplotData = this._getScatterplotData(filteredData);
     this.setState({
@@ -481,7 +478,7 @@ export default class App extends Component {
         radiusMaxPixels: 100,
         lineWidthMinPixels: 2,
         getPosition: d => d.coordinates,
-        getRadius: d => d.fuelAmount / 15000,
+        getRadius: d => d.fuelAmount / 15000 + 20,
         getFillColor: d => d.color,
         getLineColor: d => [d.color[0], d.color[1], d.color[2], 255],
         autoHighlight: true,
@@ -580,7 +577,6 @@ export default class App extends Component {
       });
     });
 
-    this._analytics(portsMod);
 
     return portsMod;
   }
@@ -667,6 +663,7 @@ export default class App extends Component {
       const temp = this.filteredDataByDate;
       let filteredData = temp.filter(obj => obj.Origin == object.port || obj.Destination == object.port);
 
+      this._analytics(filteredData);
       this.arcData = this._getArcData(filteredData);
       this.scatterplotData = this._getScatterplotData(filteredData);
 
@@ -675,7 +672,7 @@ export default class App extends Component {
       })
 
     } else {
-
+      this._analytics(this.filteredDataByDate);
       this.arcData = this._getArcData(this.filteredDataByDate);
       this.scatterplotData = this._getScatterplotData(this.filteredDataByDate);
 
@@ -697,8 +694,8 @@ export default class App extends Component {
       tooltip.style.top = `${y}px`;
       tooltip.style.left = `${x}px`;
       tooltip.innerHTML = `<div><span class="key key-route">Port:</span><span class="value">${object.port}</span></div>`;
-      tooltip.innerHTML += `<div><span class="key key-route">Shipments:</span><span class="value">${object.shipments}</span></div>`;
-      tooltip.innerHTML += `<div><span class="key key-route">Fuel Amount:</span><span class="value">${object.fuelAmount}</span></div>`;
+      tooltip.innerHTML += `<div><span class="key key-route">Shipments:</span><span class="value">${this.numberWithCommas(object.shipments)}</span></div>`;
+      tooltip.innerHTML += `<div><span class="key key-route">Fuel Amount:</span><span class="value">${this.numberWithCommas(object.fuelAmount)}</span></div>`;
       tooltip.style.opacity = 1;
     } else {
       tooltip.innerHTML = '';
@@ -713,8 +710,8 @@ export default class App extends Component {
       tooltip.style.left = `${x}px`;
       tooltip.innerHTML = `<div><span class="key key-route">Origin:</span><span class="value">${object.Origin}</span></div>`;
       tooltip.innerHTML += `<div><span class="key key-route">Destination:</span><span class="value">${object.Destination}</span></div>`;
-      tooltip.innerHTML += `<div><span class="key key-route">Shipments:</span><span class="value">${object.shipments}</span></div>`;
-      tooltip.innerHTML += `<div><span class="key key-route">Fuel Amount:</span><span class="value">${object.fuelAmount}</span></div>`;
+      tooltip.innerHTML += `<div><span class="key key-route">Shipments:</span><span class="value">${this.numberWithCommas(object.shipments)}</span></div>`;
+      tooltip.innerHTML += `<div><span class="key key-route">Fuel Amount:</span><span class="value">${this.numberWithCommas(object.fuelAmount)}</span></div>`;
 
       tooltip.innerHTML += `<div><table><colgroup><col width="40%"><col width="30%"><col width="30%"></colgroup><thead><tr><th></th><th></th><th></th></tr></thead><tbody id='tdata'></tbody></table></div>`;
 
@@ -723,7 +720,7 @@ export default class App extends Component {
       let td = document.getElementById('tdata');
       for (let i = 0; i < object.shipmentInfo.length; i++) {
         let info = object.shipmentInfo[i];
-        td.innerHTML += `<tr><td>${new Date(info.decisionDate).toLocaleString().split(',')[0]}</td><td>${info.fuelType}</td><td>${info.fuelAmount}</td></tr>`;
+        td.innerHTML += `<tr><td>${new Date(info.decisionDate).toLocaleString().split(',')[0]}</td><td>${info.fuelType}</td><td>${this.numberWithCommas(info.fuelAmount)}</td></tr>`;
       }
     } else {
       tooltip.innerHTML = '';
@@ -786,15 +783,53 @@ export default class App extends Component {
   _analytics(data) {
     this._fuelAmount = 0;
     this._shipments = 0;
-    this._involvedPorts = data.length;
+    this._involvedPorts = 0;
+
+    let portJson = {};
+    let ports = [];
 
     for (let i = 0; i < data.length; i++) {
-      this._fuelAmount += data[i].fuelAmount;
-      this._shipments += data[i].shipments;
+
+      //Fuel amount
+      this._fuelAmount += data[i].fuel_amount_clean;
+
+      //Shipments
+      this._shipments++;
+
+      //involved Ports
+      let origin = data[i].Origin;
+      if (origin !== null) {
+        if (origin in portJson) {
+        }
+        else {
+          portJson[origin] = {
+            name: origin,
+          };
+          ports.push({ name: origin });
+        }
+
+      }
+
+      let dest = data[i].Destination;
+      if (dest !== null) {
+        if (dest in portJson) {
+        }
+        else {
+          portJson[dest] = {
+            name: dest,
+          };
+          ports.push({ name: dest });
+        }
+
+      }
+
     }
+
+    this._involvedPorts = ports.length;
+
   }
 
-  _onFilterByImporter(selectedList, selectedItem) {
+  _onFilterByImporter(selectedList) {
 
     this._selectedImporter = selectedList;
 
@@ -849,7 +884,14 @@ export default class App extends Component {
   }
 
 
+  numberWithCommas(x) {
+    var parts = x.toString().split(".");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return parts.join(".");
+  }
+
   drawData() {
+    this._analytics(this.finalData);
     this.arcData = this._getArcData(this.finalData);
     this.scatterplotData = this._getScatterplotData(this.finalData);
 
@@ -893,7 +935,8 @@ export default class App extends Component {
     for (let i = 0; i < this._selectedEstMonth.length; i++) {
       str += this._selectedEstMonth[i].name + "#";
     }
-    this.filteredDataEstMonth = this.filteredDataDest.filter(obj => str.indexOf(new Date(obj.decision_date).getMonth().toLocaleString()) >= 0);
+
+    this.filteredDataEstMonth = this.filteredDataDest.filter(obj => str.indexOf(monthNames[new Date(obj.decision_date).getMonth()] + " " + new Date(obj.decision_date).getFullYear()) >= 0);
 
     //Filter by Fuel type
     str = "";
@@ -942,19 +985,19 @@ export default class App extends Component {
                   Analytics
                 </Typography>
                 <Typography className="analytics-item-value">
-                  {this._fuelAmount}
+                  {this.numberWithCommas(this._fuelAmount)}
                 </Typography>
                 <Typography className="analytics-item">
-                  Barrel
+                  MT
                 </Typography>
                 <Typography className="analytics-item-value">
-                  {this._shipments}
+                  {this.numberWithCommas(this._shipments)}
                 </Typography>
                 <Typography className="analytics-item">
                   Shipments
                 </Typography>
                 <Typography className="analytics-item-value">
-                  {this._involvedPorts}
+                  {this.numberWithCommas(this._involvedPorts)}
                 </Typography>
                 <Typography className="analytics-item">
                   Involved Ports
@@ -966,80 +1009,122 @@ export default class App extends Component {
                 <Typography className="analytics-item">
                   Importer
                 </Typography>
-                <Multiselect
+
+                <Picky
+                  id="pickyImporter"
+                  value={this._selectedImporter}
                   options={this._filterOptionsImporter}
-                  displayValue="name"
-                  showCheckbox={true}
-                  selectedValues={this._selectedImporter}
-                  onSelect={this._onFilterByImporter}
-                  onRemove={this._onFilterByImporter}
-                  style={this.filterSelectStyle}
+                  onChange={this._onFilterByImporter}
+                  open={true}
+                  keepOpen={true}
+                  numberDisplayed={3}
+                  valueKey="id"
+                  labelKey="name"
+                  multiple={true}
+                  includeSelectAll={true}
+                  dropdownHeight={37 * this._filterOptionsImporter.length}
                 />
+
                 <Divider className="divider" />
                 <Typography className="analytics-item">
                   Exporter
                 </Typography>
-                <Multiselect
+
+                <Picky
+                  id="pickyExporter"
+                  value={this._selectedExporter}
                   options={this._filterOptionsExporter}
-                  displayValue="name"
-                  showCheckbox={true}
-                  selectedValues={this._selectedExporter}
-                  onSelect={this._onFilterByExporter}
-                  onRemove={this._onFilterByExporter}
-                  style={this.filterSelectStyle}
+                  onChange={this._onFilterByExporter}
+                  open={true}
+                  keepOpen={true}
+                  numberDisplayed={3}
+                  valueKey="id"
+                  labelKey="name"
+                  multiple={true}
+                  includeSelectAll={true}
+                  dropdownHeight={37 * this._filterOptionsExporter.length}
                 />
+
                 <Divider className="divider" />
                 <Typography className="analytics-item">
                   Port of Origin
                 </Typography>
-                <Multiselect
+
+                <Picky
+                  id="pickyOrigin"
+                  value={this._selectedOrigin}
                   options={this._filterOptionsOrigin}
-                  displayValue="name"
-                  showCheckbox={true}
-                  selectedValues={this._selectedOrigin}
-                  onSelect={this._onFilterByOrigin}
-                  onRemove={this._onFilterByOrigin}
-                  style={this.filterSelectStyle}
+                  onChange={this._onFilterByOrigin}
+                  open={true}
+                  keepOpen={true}
+                  numberDisplayed={3}
+                  valueKey="id"
+                  labelKey="name"
+                  multiple={true}
+                  includeSelectAll={true}
+                  dropdownHeight={37 * this._filterOptionsOrigin.length}
                 />
+
                 <Divider className="divider" />
                 <Typography className="analytics-item">
                   Destination Port
                 </Typography>
-                <Multiselect
+
+                <Picky
+                  id="pickyDest"
+                  value={this._selectedDest}
                   options={this._filterOptionsDest}
-                  displayValue="name"
-                  showCheckbox={true}
-                  selectedValues={this._selectedDest}
-                  onSelect={this._onFilterByDest}
-                  onRemove={this._onFilterByDest}
-                  style={this.filterSelectStyle}
+                  onChange={this._onFilterByDest}
+                  open={true}
+                  keepOpen={true}
+                  numberDisplayed={3}
+                  valueKey="id"
+                  labelKey="name"
+                  multiple={true}
+                  includeSelectAll={true}
+                  dropdownHeight={37 * this._filterOptionsDest.length}
                 />
+
                 <Divider className="divider" />
                 <Typography className="analytics-item">
                   Estimated Month of Arrival
                 </Typography>
-                <Multiselect
+
+                <Picky
+                  id="pickyEstMonth"
+                  value={this._selectedEstMonth}
                   options={this._filterOptionsEstMonth}
-                  displayValue="name"
-                  showCheckbox={true}
-                  selectedValues={this._selectedEstMonth}
-                  onSelect={this._onFilterByEstMonth}
-                  onRemove={this._onFilterByEstMonth}
-                  style={this.filterSelectStyle}
+                  onChange={this._onFilterByEstMonth}
+                  open={true}
+                  keepOpen={true}
+                  numberDisplayed={3}
+                  valueKey="id"
+                  labelKey="name"
+                  multiple={true}
+                  includeSelectAll={true}
+                  dropdownHeight={37 * this._filterOptionsEstMonth.length}
                 />
+
                 <Divider className="divider" />
                 <Typography className="analytics-item">
                   Type of Fuel
                 </Typography>
-                <Multiselect
+
+                <Picky
+                  id="pickyFuelType"
+                  value={this._selectedFuelType}
                   options={this._filterOptionsFuelType}
-                  displayValue="name"
-                  showCheckbox={true}
-                  selectedValues={this._selectedFuelType}
-                  onSelect={this._onFilterByFuelType}
-                  onRemove={this._onFilterByFuelType}
-                  style={this.filterSelectStyle}
+                  onChange={this._onFilterByFuelType}
+                  open={true}
+                  keepOpen={true}
+                  numberDisplayed={3}
+                  valueKey="id"
+                  labelKey="name"
+                  multiple={true}
+                  includeSelectAll={true}
+                  dropdownHeight={37 * this._filterOptionsFuelType.length}
                 />
+
                 <Divider className="divider" />
               </List>
 
