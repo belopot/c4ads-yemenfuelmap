@@ -51,6 +51,7 @@ const ExpansionPanelDetails = withStyles({
   root: {
     backgroundColor: 'rgba(20, 20, 20, 1)',
     color: analyticsFontColor,
+    height: window.innerHeight - 130,
     maxHeight: window.innerHeight - 130,
     overflowY: 'auto'
   },
@@ -74,8 +75,8 @@ let INITIAL_VIEW_STATE = {
   bearing: 0
 };
 
-const DestColor = [210, 255, 102, 100];
-const SourceColor = [102, 196, 255, 100];
+const DestColor = [248, 229, 200, 100];
+const SourceColor = [212, 173, 109, 100];
 
 let tooltip = $(".tooltip")[0];
 
@@ -1015,7 +1016,7 @@ export default class App extends Component {
                   value={this._selectedImporter}
                   options={this._filterOptionsImporter}
                   onChange={this._onFilterByImporter}
-                  open={true}
+                  open={false}
                   keepOpen={true}
                   numberDisplayed={3}
                   valueKey="id"
@@ -1035,7 +1036,7 @@ export default class App extends Component {
                   value={this._selectedExporter}
                   options={this._filterOptionsExporter}
                   onChange={this._onFilterByExporter}
-                  open={true}
+                  open={false}
                   keepOpen={true}
                   numberDisplayed={3}
                   valueKey="id"
@@ -1055,7 +1056,7 @@ export default class App extends Component {
                   value={this._selectedOrigin}
                   options={this._filterOptionsOrigin}
                   onChange={this._onFilterByOrigin}
-                  open={true}
+                  open={false}
                   keepOpen={true}
                   numberDisplayed={3}
                   valueKey="id"
@@ -1075,7 +1076,7 @@ export default class App extends Component {
                   value={this._selectedDest}
                   options={this._filterOptionsDest}
                   onChange={this._onFilterByDest}
-                  open={true}
+                  open={false}
                   keepOpen={true}
                   numberDisplayed={3}
                   valueKey="id"
@@ -1095,7 +1096,7 @@ export default class App extends Component {
                   value={this._selectedEstMonth}
                   options={this._filterOptionsEstMonth}
                   onChange={this._onFilterByEstMonth}
-                  open={true}
+                  open={false}
                   keepOpen={true}
                   numberDisplayed={3}
                   valueKey="id"
@@ -1115,7 +1116,7 @@ export default class App extends Component {
                   value={this._selectedFuelType}
                   options={this._filterOptionsFuelType}
                   onChange={this._onFilterByFuelType}
-                  open={true}
+                  open={false}
                   keepOpen={true}
                   numberDisplayed={3}
                   valueKey="id"
