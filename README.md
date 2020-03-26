@@ -1,10 +1,10 @@
 # Interactive Map
 
-![Bagel](https://github.com/belopot/data-viz-yemen-fuel-map/blob/master/assets/screenshots/deckgl.JPG)
+![Bagel](https://github.com/belopot/interactive-fuel-map/blob/master/assets/screenshots/deckgl.JPG)
 
 
 View the project
-(https://belopot.github.io/data-viz-yemen-fuel-map/)
+(https://belopot.github.io/interactive-fuel-map/)
  
 
 ## Available Scripts
