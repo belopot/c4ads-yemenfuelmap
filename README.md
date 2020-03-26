@@ -1,6 +1,6 @@
 # interactive-map-deckgl
 
-![Bagel](https://github.com/belopot/data-viz-yemen-fuel-map/master/assets/screenshots/deckgl.JPG?raw=true)
+![Bagel](https://github.com/belopot/data-viz-yemen-fuel-map/assets/screenshots/deckgl.JPG?raw=true)
  
 
 ## Available Scripts
