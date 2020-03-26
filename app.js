@@ -142,7 +142,7 @@ export default class App extends Component {
     this.csvData = csvData;
 
     //Sort by date
-    this.csvData.sort((a, b) => a.application_num - b.application_num);
+    this.csvData.sort((a, b) => new Date(a.decision_date) - new Date(b.decision_date));
 
 
     //Filtered Data
@@ -152,6 +152,7 @@ export default class App extends Component {
     this.filteredDataDest = this.csvData;
     this.filteredDataEstMonth = this.csvData;
     this.filteredDataFuelType = this.csvData;
+    this.filteredDataDecision = this.csvData;
     this.finalData = this.csvData;
 
     /**
@@ -184,8 +185,8 @@ export default class App extends Component {
 
     this.isPreserve = true;
 
-    this._updateDeckLayer = this._updateDeckLayer.bind(this);
-    this.slider.subscribe('moving', this._updateDeckLayer);
+    this._moveTimeline = this._moveTimeline.bind(this);
+    this.slider.subscribe('moving', this._moveTimeline);
 
     //Play | Pause 
     this._controlTimeline = this._controlTimeline.bind(this);
@@ -213,7 +214,6 @@ export default class App extends Component {
     this.scatterplotData = this._getScatterplotData(this.finalData);
 
 
-    this.filteredDataByDate = this.finalData;
 
     this._histogram(this.finalData);
 
@@ -439,7 +439,7 @@ export default class App extends Component {
     this.isPlaying = false;
   }
 
-  _updateDeckLayer(value) {
+  _moveTimeline(value) {
 
     const { left, right } = value;
 
@@ -450,15 +450,17 @@ export default class App extends Component {
     maxDateDom.innerHTML = right.toLocaleString().split(',')[0];
 
     //Filter data by decision_date
-    let filteredData = this.finalData.filter(obj => new Date(obj.decision_date) >= new Date(left));
+    let filteredData = this.filteredDataFuelType.filter(obj => new Date(obj.decision_date) >= new Date(left));
     filteredData = filteredData.filter(obj => new Date(obj.decision_date) <= new Date(right));
 
-    this.filteredDataByDate = filteredData;
+    this.filteredDataDecision = filteredData;
+
+    this.finalData = this.filteredDataDecision;
 
     //Draw data
-    this._analytics(filteredData);
-    this.arcData = this._getArcData(filteredData);
-    this.scatterplotData = this._getScatterplotData(filteredData);
+    this._analytics(this.finalData);
+    this.arcData = this._getArcData(this.finalData);
+    this.scatterplotData = this._getScatterplotData(this.finalData);
     this.setState({
       selectedPort: null,
     })
@@ -661,7 +663,7 @@ export default class App extends Component {
   _scatterplotFilterData(object) {
     if (object) {
 
-      const temp = this.filteredDataByDate;
+      const temp = this.finalData;
       let filteredData = temp.filter(obj => obj.Origin == object.port || obj.Destination == object.port);
 
       this._analytics(filteredData);
@@ -673,9 +675,9 @@ export default class App extends Component {
       })
 
     } else {
-      this._analytics(this.filteredDataByDate);
-      this.arcData = this._getArcData(this.filteredDataByDate);
-      this.scatterplotData = this._getScatterplotData(this.filteredDataByDate);
+      this._analytics(this.finalData);
+      this.arcData = this._getArcData(this.finalData);
+      this.scatterplotData = this._getScatterplotData(this.finalData);
 
       this.setState({
         selectedPort: null,
@@ -908,35 +910,36 @@ export default class App extends Component {
     for (let i = 0; i < this._selectedImporter.length; i++) {
       str += this._selectedImporter[i].name + "#";
     }
-    this.filteredDataImporter = this.csvData.filter(obj => str.indexOf(obj.importer_proxy) >= 0);
+    this.filteredDataImporter = this.csvData.filter(obj => str.indexOf(obj.importer_proxy) >= 0 || obj.importer_proxy == null);
 
     //Filter by Exporter
     str = "";
     for (let i = 0; i < this._selectedExporter.length; i++) {
       str += this._selectedExporter[i].name + "#";
     }
-    this.filteredDataExporter = this.filteredDataImporter.filter(obj => str.indexOf(obj.exporter_proxy) >= 0);
+    this.filteredDataExporter = this.filteredDataImporter.filter(obj => str.indexOf(obj.exporter_proxy) >= 0 || obj.exporter_proxy == null);
+
 
     //Filter by Origin
     str = "";
     for (let i = 0; i < this._selectedOrigin.length; i++) {
       str += this._selectedOrigin[i].name + "#";
     }
-    this.filteredDataOrigin = this.filteredDataExporter.filter(obj => str.indexOf(obj.Origin) >= 0);
+    this.filteredDataOrigin = this.filteredDataExporter.filter(obj => str.indexOf(obj.Origin) >= 0 || obj.Origin == null);
+
 
     //Filter by Dest
     str = "";
     for (let i = 0; i < this._selectedDest.length; i++) {
       str += this._selectedDest[i].name + "#";
     }
-    this.filteredDataDest = this.filteredDataOrigin.filter(obj => str.indexOf(obj.Destination) >= 0);
+    this.filteredDataDest = this.filteredDataOrigin.filter(obj => str.indexOf(obj.Destination) >= 0 || obj.Destination == null);
 
     //Filter by EstMonth
     str = "";
     for (let i = 0; i < this._selectedEstMonth.length; i++) {
       str += this._selectedEstMonth[i].name + "#";
     }
-
     this.filteredDataEstMonth = this.filteredDataDest.filter(obj => str.indexOf(monthNames[new Date(obj.decision_date).getMonth()] + " " + new Date(obj.decision_date).getFullYear()) >= 0);
 
     //Filter by Fuel type
@@ -944,9 +947,16 @@ export default class App extends Component {
     for (let i = 0; i < this._selectedFuelType.length; i++) {
       str += this._selectedFuelType[i].name + "#";
     }
-    this.filteredDataFuelType = this.filteredDataEstMonth.filter(obj => str.indexOf(obj.fuel_type_clean_EN) >= 0);
+    this.filteredDataFuelType = this.filteredDataEstMonth.filter(obj => str.indexOf(obj.fuel_type_clean_EN) >= 0 || obj.fuel_type_clean_EN == null);
 
-    this.finalData = this.filteredDataFuelType;
+
+
+    //Filter by Decision date
+    let filteredData = this.filteredDataFuelType.filter(obj => new Date(obj.decision_date.toLocaleString()) >= new Date(this.curStartDate));
+    this.filteredDataDecision = filteredData.filter(obj => new Date(obj.decision_date.toLocaleString()) <= new Date(this.curEndDate));
+
+    this.finalData = this.filteredDataDecision;
+    
   }
 
   handleExpand(event, newExpanded) {
