@@ -4,7 +4,7 @@
 
 
 View the project
-(https://belopot.github.io/interactive-fuel-map/)
+(https://belopot.github.io/dataviz-fuelmap/)
  
 
 ## Available Scripts
