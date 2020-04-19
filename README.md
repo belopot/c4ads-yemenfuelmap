@@ -1,6 +1,6 @@
 # Interactive Map
 
-![Bagel](https://github.com/belopot/interactive-fuel-map/blob/master/assets/screenshots/deckgl.JPG)
+![Bagel](https://github.com/belopot/interactive-fuel-map/blob/master/screenshots/deckgl.JPG)
 
 
 View the project
@@ -14,7 +14,7 @@ In the project directory, you can run:
 ##### `yarn start`
 
 Runs the app in the development mode.<br/>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Open [http://localhost:9000](http://localhost:9000) to view it in the browser.
 
 The page will reload if you make edits.<br/>
 
