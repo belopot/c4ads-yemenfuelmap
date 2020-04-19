@@ -5,7 +5,7 @@ import { render } from 'react-dom';
 import { StaticMap } from 'react-map-gl';
 import DeckGL from '@deck.gl/react';
 import { ScatterplotLayer, ArcLayer } from '@deck.gl/layers';
-import csvData from './assets/data2.csv';
+import csvData from './assets/data.csv';
 import $ from 'jquery';
 import * as d3 from "d3";
 import Slider from 'omni-slider';
