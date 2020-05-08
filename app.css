@@ -309,7 +309,7 @@ tr:nth-child(even) {
 }
 
 .picky__dropdown .option:hover, .picky__dropdown li:hover {
-    background-color: #4b4b4b;
+    /* background-color: #4b4b4b; */
 }
 
 .picky__dropdown .option.selected, .picky__dropdown li.selected {

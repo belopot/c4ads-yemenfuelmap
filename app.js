@@ -25,8 +25,6 @@ import ListItemText from '@material-ui/core/ListItemText';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 
 import { Picky } from 'react-picky';
-import 'react-picky/dist/picky.css'; // Include CSS
-
 
 const analyticsFontColor = '#c7c7c7';
 
