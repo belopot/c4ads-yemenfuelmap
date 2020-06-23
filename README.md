@@ -1,5 +1,8 @@
 # Interactive Map
 
+## About
+The interactive map shows fuel shipment route with Yemen from other countires. The data is time series data, and added the playable timeline.
+
 ![Bagel](https://github.com/belopot/interactive-fuel-map/blob/master/screenshots/deckgl.JPG)
 
 
