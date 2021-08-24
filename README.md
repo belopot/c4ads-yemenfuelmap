@@ -7,7 +7,7 @@ The interactive map shows fuel shipment route with Yemen from other countires. T
 
 
 View the project
-(https://belopot.github.io/dataviz-fuelmap/)
+(https://belopot.github.io/c4ads-yemenfuelmap/)
  
 
 ## Available Scripts
