@@ -10,7 +10,7 @@
   "dependencies": {
     "@material-ui/core": "^4.9.5",
     "@material-ui/icons": "^4.9.1",
-    "d3": "^4.13.0",
+    "d3": "^7.6.1",
     "deck.gl": "^8.0.0",
     "gsap": "^3.1.1",
     "jquery": "^3.4.1",
